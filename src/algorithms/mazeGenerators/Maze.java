@@ -8,9 +8,6 @@ public class Maze {
     int column;
 
 
-
-
-
 //    public String toString(){
 //        StringBuilder sb = new StringBuilder();
 //        for(int x=0; x< column ; x++){
@@ -20,21 +17,22 @@ public class Maze {
 //        }
 //        return sb.toString();}
     public String toString(){
-        final char PASSAGE_CHAR = ' ';
-        final char WALL_CHAR = '▓';
+        final char PASSAGE_CHAR = '*';
+        final char WALL_CHAR = 'X';
+        final char SemiWall = '*';
         final StringBuffer b = new StringBuffer();
-        for ( int x = 0; x < column + 2; x++ )
-            b.append( WALL_CHAR );
-        b.append( '\n' );
+//        for ( int x = 0; x < column + 2; x++ )
+//            b.append( WALL_CHAR );
+//        b.append( '\n' );
         for ( int y = 0; y < rows; y++ ){
-            b.append( WALL_CHAR );
+//            b.append( WALL_CHAR );
             for ( int x = 0; x < column; x++ )
                 b.append( maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR );
-            b.append( WALL_CHAR );
+//            b.append( WALL_CHAR );
             b.append( '\n' );
         }
-        for ( int x = 0; x < column + 2; x++ )
-            b.append( WALL_CHAR );
+//        for ( int x = 0; x < column + 2; x++ )
+//            b.append( WALL_CHAR );
         b.append( '\n' );
         return b.toString();
     }
@@ -50,4 +48,17 @@ public class Maze {
                 maze[i][j]=1;
             }
 }
-    }}
+    }
+
+    public void print() {
+        System.out.println(this);
+    }
+
+    public Position getStartPosition() {
+        return new Position(0,1);
+    }
+
+    public Object getGoalPosition() {
+        return new Position(rows - 1, column - 2);
+    }
+}

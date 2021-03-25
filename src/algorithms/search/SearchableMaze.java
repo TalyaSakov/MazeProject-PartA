@@ -19,6 +19,12 @@ public class SearchableMaze implements ISearchable {
         return (new MazeState(startPosition.getRowIndex(),startPosition.getColumnIndex()));
     }
 
+    @Override
+    public AState getEnd() {
+        Position endPosition = maze.getGoalPosition();
+        return (new MazeState(endPosition.getRowIndex(),endPosition.getColumnIndex()));
+    }
+
     public List<AState> PossibleStates(AState curr_state){
         List<AState> Possible_states = new ArrayList<>();
 
@@ -38,8 +44,8 @@ public class SearchableMaze implements ISearchable {
             }
 
         }
-        if (curr_state.getRow() < maze.getRows()) {
-            if (curr_state.getColumn() < maze.getColumn() && this.maze.getMaze()[curr_state.getRow() + 1][curr_state.getColumn() + 1] == 0){
+        if (curr_state.getRow() < maze.getRows() - 1 ) {
+            if (curr_state.getColumn() < maze.getColumn() - 1 && this.maze.getMaze()[curr_state.getRow() + 1][curr_state.getColumn() + 1] == 0){
                 Position goDownRight = new Position(curr_state.getRow() + 1, curr_state.getColumn() + 1);
                 Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex()));
             }
@@ -50,7 +56,7 @@ public class SearchableMaze implements ISearchable {
         }
 
         //Not diagonals
-        if (curr_state.getRow() < maze.getRows() && this.maze.getMaze()[curr_state.getRow() + 1][curr_state.getColumn()] == 0){
+        if (curr_state.getRow() < maze.getRows() - 1 && this.maze.getMaze()[curr_state.getRow() + 1][curr_state.getColumn()] == 0){
             Position goDown = new Position(curr_state.getRow() + 1, curr_state.getColumn());
             Possible_states.add(new MazeState(goDown.getRowIndex(),goDown.getColumnIndex()));
         }
@@ -62,7 +68,7 @@ public class SearchableMaze implements ISearchable {
             Position goLeft = new Position(curr_state.getRow(), curr_state.getColumn() -1);
             Possible_states.add(new MazeState(goLeft.getRowIndex(),goLeft.getColumnIndex()));
         }
-        if (curr_state.getColumn() < maze.getColumn() && this.maze.getMaze()[curr_state.getRow()][curr_state.getColumn() + 1] == 0){
+        if (curr_state.getColumn() < maze.getColumn() - 1 && this.maze.getMaze()[curr_state.getRow()][curr_state.getColumn() + 1] == 0){
             Position goRight = new Position(curr_state.getRow(), curr_state.getColumn() + 1);
             Possible_states.add(new MazeState(goRight.getRowIndex(),goRight.getColumnIndex()));
         }

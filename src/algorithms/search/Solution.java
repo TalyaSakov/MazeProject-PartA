@@ -1,13 +1,15 @@
 package algorithms.search;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Solution {
-    HashSet<AState> path;
+    ArrayList<AState> path;
 
 
     public Solution() {
-        this.path = new HashSet<AState>();
+        this.path = new ArrayList<AState>();
     }
     public boolean contains(AState temp){
         return path.contains(temp);

@@ -23,7 +23,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         Stack<AState> stack = new Stack<>();
         Solution visited = new Solution();
         stack.push(startState);
-        while(!stack.isEmpty()){
+        while(!stack.isEmpty() && stack.peek() != specificPuzzle.getEnd()){
             AState tmp = stack.pop();
             if(!visited.contains(tmp)){
                 visited.add(tmp);
@@ -33,4 +33,6 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         }
         return visited;
     }
+
+
 }

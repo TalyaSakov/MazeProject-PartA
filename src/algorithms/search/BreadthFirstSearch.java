@@ -3,6 +3,9 @@ package algorithms.search;
 import java.util.*;
 
 public class BreadthFirstSearch extends ASearchingAlgorithm{
+
+    int numOfNodesEvaluated;
+
     @Override
     public String getName() {
         return null;
@@ -10,34 +13,32 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     @Override
     public int getNumberOfNodesEvaluated() {
-        return 0;
+        return this.numOfNodesEvaluated;
     }
 
     @Override
     public Solution solve(ISearchable specificPuzzle) {
             AState startState = specificPuzzle.getStart();
-            Queue<AState> stack = new LinkedList<>();
+            Queue<AState> queue = new LinkedList<>();
             HashSet<AState> visited = new HashSet<>();
-            stack.push(startState);
-            while(!stack.isEmpty() || (!(stack.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())))){
-                AState tmp = stack.pop();
+            queue.add(startState);
+            while(!queue.isEmpty()){
+                if ((queue.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn()))){break;}
+                AState tmp = queue.poll();
                 if(!visited.contains(tmp)){
                     visited.add(tmp);
                     List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp);
-                    if (possibleStates.size() == 0){
-                        tmp.setParentNull();
-                        continue;}
-                    for(AState n : possibleStates){
-                        n.setParent(tmp);
-                        stack.push(n);}
+                    for(AState adjacent: possibleStates){
+                        adjacent.setParent(tmp);
+                        queue.add(adjacent);}
                 }
             }
-            if (stack.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){
-                return getSolution(stack.pop());
+        assert queue.peek() != null;
+        if (queue.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){
+                return getSolution(queue.poll());
             }
             return null;
         }
-    }
     private Solution getSolution(AState tmp) {
         Solution solution = new Solution();
         solution.add(tmp);

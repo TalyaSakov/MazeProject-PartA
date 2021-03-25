@@ -7,7 +7,6 @@ public class Position {
     public int getRowIndex() {
         return row;
     }
-
     public int getColumnIndex() {
         return column;
     }

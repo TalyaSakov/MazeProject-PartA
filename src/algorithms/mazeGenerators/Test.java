@@ -9,6 +9,5 @@ public class Test {
         Maze temp = test.generate(50,50);
         System.out.println(temp);
 
-
     }
 }

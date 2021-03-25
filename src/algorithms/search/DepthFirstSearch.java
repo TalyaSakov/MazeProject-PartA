@@ -6,6 +6,8 @@ import java.util.Stack;
 
 public class DepthFirstSearch extends ASearchingAlgorithm {
 
+    int numOfNodesEvaluated;
+
 //    Stack<AState> DFS_stack;
 
     @Override
@@ -29,7 +31,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             AState tmp = stack.pop();
             if(!visited.contains(tmp)){
                 visited.add(tmp);
-                List<AState> possibleStates = specificPuzzle.PossibleStates(tmp);
+                List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp);
                 if (possibleStates.size() == 0){
                     tmp.setParentNull();
                     continue;}
@@ -46,11 +48,13 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     private Solution getSolution(AState tmp) {
         Solution solution = new Solution();
+        solution.add(tmp);
+        this.numOfNodesEvaluated++;
         while (tmp.getParent() != null){
             solution.add(tmp.getParent());
+            this.numOfNodesEvaluated++;
             tmp = tmp.getParent();
         }
-        System.out.println(solution.getPath().size());
         return solution;
     }
 }

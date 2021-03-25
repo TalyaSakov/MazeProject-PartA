@@ -7,14 +7,13 @@ public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int rows, int column) {
         int NewColumn = column -2;
-        int NewRows = rows -2;
+        int NewRows = rows -1;
         Maze maze =  new Maze(NewRows,NewColumn);
         maze.maze[0][0] = 0;
         maze.maze[NewRows-1][NewColumn-1] = 0;
         final LinkedList<int[]> frontiers = new LinkedList<>();
         final Random random = new Random();
-//        int x = random.nextInt(column);
-//        int y = random.nextInt(rows);
+
         int x = 0; //rows
         int y = 1; //column
         frontiers.add(new int[]{x, y, x, y});
@@ -43,8 +42,20 @@ public class MyMazeGenerator extends AMazeGenerator {
                 newMaze.maze[i+1][j+1] = maze.maze[i][j];
             }
         }
+
+        LinkedList<Integer> endPositions = new LinkedList<>();
+        for (int i = 0; i < column - 1 ; i++) {
+            if (newMaze.maze[rows - 2][i] == 0){
+                endPositions.addLast(i);
+            }
+        }
+
+        int endPos = random.nextInt(endPositions.size());
+        endPos = endPositions.get(endPos);
         newMaze.maze[0][1] = 0;
-        newMaze.maze[rows -1][column -2] = 0;
+        newMaze.maze[rows-1][endPos] = 0;
+        newMaze.end_position.setRow(rows -1);
+        newMaze.end_position.setColumn(endPos);
         return newMaze;
     }
 }

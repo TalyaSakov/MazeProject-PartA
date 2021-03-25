@@ -8,9 +8,19 @@ public class Maze {
     int column;
     Position end_position;
 
+    public int getRows() {
+        return rows;
+    }
 
+    public int getColumn() {
+        return column;
+    }
 
-//    public String toString(){
+    public int[][] getMaze() {
+        return maze;
+    }
+
+    //    public String toString(){
 //        StringBuilder sb = new StringBuilder();
 //        for(int x=0; x< column ; x++){
 //            for(int y=0; y<rows; y++)

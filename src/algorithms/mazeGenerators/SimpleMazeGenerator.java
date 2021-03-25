@@ -17,8 +17,6 @@ public class SimpleMazeGenerator extends AMazeGenerator {
                 maze.maze[i][j] = (int) Math.round(Math.random());
             }
         }
-
-        System.out.println(maze);
         return maze;
     }
 }

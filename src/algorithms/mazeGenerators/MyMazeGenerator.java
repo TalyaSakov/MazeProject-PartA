@@ -22,7 +22,6 @@ public class MyMazeGenerator extends AMazeGenerator {
             final int[] f = frontiers.remove(random.nextInt(frontiers.size()));
             x = f[2];
             y = f[3];
-            maze.print();
             if (maze.maze[x][y] == 1) {
                  maze.maze[f[0]][f[1]] = maze.maze[x][y] = 0;
                 if (x >= 2 && maze.maze[x - 2][y] == 1)

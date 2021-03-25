@@ -7,6 +7,9 @@ import java.util.List;
 public class Solution {
     ArrayList<AState> path;
 
+    public ArrayList<AState> getPath() {
+        return path;
+    }
 
     public Solution() {
         this.path = new ArrayList<AState>();

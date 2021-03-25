@@ -25,13 +25,13 @@ public class SearchableMaze implements ISearchable {
         return (new MazeState(endPosition.getRowIndex(),endPosition.getColumnIndex()));
     }
 
+
     public List<AState> PossibleStates(AState curr_state){
         List<AState> Possible_states = new ArrayList<>();
 
         //Map all the positions around the current state
 
         //Diagonals
-
         //UpRight
         if (curr_state.getRow() >= 1){
             if (curr_state.getColumn() < maze.getColumn() && this.maze.getMaze()[curr_state.getRow() - 1][curr_state.getColumn() + 1] == 0){

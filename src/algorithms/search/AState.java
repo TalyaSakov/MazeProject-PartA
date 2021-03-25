@@ -1,12 +1,16 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
-
 import java.util.Objects;
 
 public abstract class AState {
     int row;
     int column;
+
+
+    public AState(int row, int column) {
+        this.row = row;
+        this.column = column;
+    }
 //    Position position;
 
 
@@ -27,6 +31,13 @@ public abstract class AState {
                 column == aState.column;
     }
 
+    public boolean equals(int row, int column) {
+        return this.row == row && this.column == column;
+    }
+
+
+
+
     @Override
     public int hashCode() {
         return Objects.hash(row, column);
@@ -39,6 +50,10 @@ public abstract class AState {
     public int getColumn() {
         return column;
     }
+
+    public abstract void setParent(AState parent);
+    public abstract AState getParent();
+    public abstract void setParentNull();
 
 //    public Position getPosition() {
 //        return position;

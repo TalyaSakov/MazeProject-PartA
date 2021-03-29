@@ -1,5 +1,6 @@
 package algorithms.search;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
@@ -22,6 +23,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable specificPuzzle) {
+        System.out.println("DFS SCAN");
         AState startState = specificPuzzle.getStart();
         Stack<AState> stack = new Stack<>();
         HashSet<AState> visited = new HashSet<>();
@@ -38,6 +40,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
                 for(AState n : possibleStates){
                     n.setParent(tmp);
                     stack.push(n);}
+
             }
         }
         if (stack.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){

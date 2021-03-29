@@ -37,27 +37,27 @@ public class SearchableMaze implements ISearchable {
 
         //Diagonals
         //UpRight
-        if (curr_state.getRow() >= 1){
-            if (Diagonal_Verification("goUpRight",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
-                Position goUpRight = new Position(curr_state.getRow() - 1, curr_state.getColumn() + 1);
-                Possible_states.add(new MazeState(goUpRight.getRowIndex(),goUpRight.getColumnIndex()));
-            }
-            if (Diagonal_Verification("goUpLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
-                Position goUpLeft = new Position(curr_state.getRow() - 1 , curr_state.getColumn() -1 );
-                Possible_states.add(new MazeState(goUpLeft.getRowIndex(),goUpLeft.getColumnIndex()));
-            }
-
-        }
-        if (curr_state.getRow() < maze.getRows() - 1 ) {
-            if (Diagonal_Verification("goDownRight",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
-                Position goDownRight = new Position(curr_state.getRow() + 1, curr_state.getColumn() + 1);
-                Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex()));
-            }
-            if (Diagonal_Verification("goDownLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
-                Position goDownLeft = new Position(curr_state.getRow() + 1, curr_state.getColumn() -1);
-                Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex()));
-            }
-        }
+//        if (curr_state.getRow() >= 1){
+//            if (Diagonal_Verification("goUpRight",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
+//                Position goUpRight = new Position(curr_state.getRow() - 1, curr_state.getColumn() + 1);
+//                Possible_states.add(new MazeState(goUpRight.getRowIndex(),goUpRight.getColumnIndex()));
+//            }
+//            if (Diagonal_Verification("goUpLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
+//                Position goUpLeft = new Position(curr_state.getRow() - 1 , curr_state.getColumn() -1 );
+//                Possible_states.add(new MazeState(goUpLeft.getRowIndex(),goUpLeft.getColumnIndex()));
+//            }
+//
+//        }
+//        if (curr_state.getRow() < maze.getRows() - 1 ) {
+//            if (Diagonal_Verification("goDownRight",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
+//                Position goDownRight = new Position(curr_state.getRow() + 1, curr_state.getColumn() + 1);
+//                Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex()));
+//            }
+//            if (Diagonal_Verification("goDownLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
+//                Position goDownLeft = new Position(curr_state.getRow() + 1, curr_state.getColumn() -1);
+//                Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex()));
+//            }
+//        }
 
         //Not diagonals
         if (Non_Diagonal_Verification("goDown",curr_state_maze)){
@@ -76,7 +76,7 @@ public class SearchableMaze implements ISearchable {
             Position goRight = new Position(curr_state_maze.getRow(), curr_state_maze.getColumn() + 1);
             Possible_states.add(new MazeState(goRight.getRowIndex(),goRight.getColumnIndex()));
         }
-
+        System.out.println(maze.toString(Possible_states));
     return Possible_states;
     }
 
@@ -98,7 +98,4 @@ public class SearchableMaze implements ISearchable {
             default -> false;
         };
     }
-
-
-
 }

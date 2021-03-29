@@ -18,6 +18,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     @Override
     public Solution solve(ISearchable specificPuzzle) {
+            System.out.println("BFS SCAN");
             AState startState = specificPuzzle.getStart();
             Queue<AState> queue = new LinkedList<>();
             HashSet<AState> visited = new HashSet<>();

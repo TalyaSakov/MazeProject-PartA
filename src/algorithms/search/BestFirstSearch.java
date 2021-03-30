@@ -19,10 +19,10 @@ public class BestFirstSearch extends BreadthFirstSearch {
         class AStateComparerator implements Comparator<AState> {
             @Override
             public int compare(AState s1, AState s2) {
-                return Integer.compare(s2.getCost(), s1.getCost());
+                return Integer.compare(s1.getSumCost(), s2.getSumCost());
             }
         }
         PriorityQueue<AState> PQ = new PriorityQueue<AState>(new AStateComparerator());
-        return super.solve(specificPuzzle,PQ,"BestFS");
+        return super.solve(specificPuzzle,PQ);
     }
 }

@@ -3,6 +3,7 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,7 +43,6 @@ public class SearchableMaze implements ISearchable {
 
         //Diagonals
         //UpRight
-        if (this.searchingAlgorithm.equals("BestFS")){
             if (curr_state_maze.getRow() >= 1){
                 if (Diagonal_Verification("goUpRight",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
                     Position goUpRight = new Position(curr_state_maze.getRow() - 1, curr_state_maze.getColumn() + 1);
@@ -64,7 +64,7 @@ public class SearchableMaze implements ISearchable {
                     Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex(),15));
                 }
             }
-        }
+
 
         //Not diagonals
         if (Non_Diagonal_Verification("goDown",curr_state_maze)){
@@ -84,7 +84,9 @@ public class SearchableMaze implements ISearchable {
             Possible_states.add(new MazeState(goRight.getRowIndex(),goRight.getColumnIndex(),10));
         }
 //        System.out.println(maze.toString(Possible_states));
-    return Possible_states;
+        Collections.shuffle(Possible_states);
+        return Possible_states;
+
     }
 
     public boolean Diagonal_Verification(String str,MazeState curr_state_maze,MazeState next_curr_state){return switch (str) {

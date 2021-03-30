@@ -5,6 +5,19 @@ import java.util.Objects;
 public abstract class AState {
     AState parent;
     int cost;
+    int sumCost;
+
+    public void setSumCost(int sumCost) {
+        this.sumCost = sumCost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getSumCost() {
+        return sumCost;
+    }
 
     public int getCost() {
         return cost;

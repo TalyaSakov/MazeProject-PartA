@@ -7,19 +7,12 @@ import java.util.List;
 public class Solution {
     private ArrayList<AState> path;
 
-    public ArrayList<AState> getPath() {
-        return path;
-    }
-
-
-
     public Solution() {
         this.path = new ArrayList<AState>();
     }
     public boolean contains(AState temp){
         return path.contains(temp);
     }
-
     public void add(AState tmp) {
         path.add(tmp);
     }
@@ -29,5 +22,9 @@ public class Solution {
         return "Solution{" +
                 "path=" + path +
                 '}';
+    }
+
+    public ArrayList<AState> getSolutionPath() {
+        return path;
     }
 }

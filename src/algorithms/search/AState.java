@@ -15,6 +15,7 @@ public abstract class AState {
 
     public AState(int row, int column) {
         this.position = new Position(row,column);
+        this.cost = 0;
     }
 //    Position position;
 

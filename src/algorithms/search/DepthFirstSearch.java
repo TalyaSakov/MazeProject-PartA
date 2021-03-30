@@ -29,11 +29,11 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         HashSet<AState> visited = new HashSet<>();
         stack.push(startState);
         while(!stack.isEmpty()){
-            if ((stack.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn()))){break;}
+            if ((stack.peek().equals(specificPuzzle.getEnd()))){break;}
             AState tmp = stack.pop();
             if(!visited.contains(tmp)){
                 visited.add(tmp);
-                List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp);
+                List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp,"DFS");
                 if (possibleStates.size() == 0){
                     tmp.setParentNull();
                     continue;}
@@ -43,7 +43,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
             }
         }
-        if (stack.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){
+        if (stack.peek().equals(specificPuzzle.getEnd())){
             return getSolution(stack.pop());
         }
         return null;

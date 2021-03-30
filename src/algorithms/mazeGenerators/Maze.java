@@ -1,16 +1,18 @@
 package algorithms.mazeGenerators;
 
 import algorithms.search.AState;
+import algorithms.search.MazeState;
 import algorithms.search.Solution;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Maze {
-    int [][] maze;
+    int[][] maze;
     int rows;
     int column;
     Position end_position;
+    Position start_position;
 
     public int getRows() {
         return rows;
@@ -33,7 +35,7 @@ public class Maze {
 //        }
 //        return sb.toString();}
 
-    public String toString(List<AState> list){
+    public String toString(List<MazeState> list) {
         final char PASSAGE_CHAR = '*';
         final char WALL_CHAR = 'X';
         final char MARKED_CHAR = 'S';
@@ -48,39 +50,40 @@ public class Maze {
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
 //        b.append( '\n' );
-        for ( int x = 0; x < rows; x++ ){
+        for (int x = 0; x < rows; x++) {
 //            b.append( WALL_CHAR );
-            for ( int y = 0; y < column; y++ )
-                if (markedMaze[x][y] == true){
-                    b.append(MARKED_CHAR); }
-            else{
-                    b.append( maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR );
+            for (int y = 0; y < column; y++)
+                if (markedMaze[x][y] == true) {
+                    b.append(MARKED_CHAR);
+                } else {
+                    b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
                 }
 //            b.append( WALL_CHAR );
-            b.append( '\n' );
+            b.append('\n');
         }
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
-        b.append( '\n' );
+        b.append('\n');
         return b.toString();
     }
-    public String toString(){
+
+    public String toString() {
         final char PASSAGE_CHAR = '*';
         final char WALL_CHAR = 'X';
         final StringBuffer b = new StringBuffer();
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
 //        b.append( '\n' );
-        for ( int x = 0; x < rows; x++ ){
+        for (int x = 0; x < rows; x++) {
 //            b.append( WALL_CHAR );
-            for ( int y = 0; y < column; y++ )
-                b.append( maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR );
+            for (int y = 0; y < column; y++)
+                b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
 //            b.append( WALL_CHAR );
-            b.append( '\n' );
+            b.append('\n');
         }
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
-        b.append( '\n' );
+        b.append('\n');
         return b.toString();
     }
 
@@ -88,25 +91,36 @@ public class Maze {
     public Maze(int rows, int column) {
         this.rows = rows;
         this.column = column;
-        this.end_position = new Position(0,0);
+        this.end_position = new Position(0, 0);
         maze = new int[rows][column];
-        int i,j;
-        for  (i=0;i<this.column;i++){
-            for (j=0;j<this.rows;j++){
-                maze[j][i]=1;
+        int i, j;
+        for (i = 0; i < this.column; i++) {
+            for (j = 0; j < this.rows; j++) {
+                maze[j][i] = 1;
             }
-}
+        }
     }
 
     public void print() {
         System.out.println(this);
     }
 
-    public Position getStartPosition() {
-        return new Position(0,1);
+    public void setStartPosition(int row, int column) {
+        start_position = new Position(row, column);
     }
 
-    public Position getGoalPosition() {
+    public void setEndPosition(int row, int column) {
+        end_position = new Position(row, column);
+    }
+
+    public Position getEndPosition() {
         return end_position;
     }
+
+
+    public Position getStartPosition() {
+        return start_position;
+    }
 }
+
+

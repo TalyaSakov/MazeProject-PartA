@@ -17,10 +17,10 @@ public class RunSearchOnMaze {
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm
             searcher) {
-//Solve a searching problem with a searcher
+        //Solve a searching problem with a searcher
         Solution solution = searcher.solve(domain);
         System.out.println(String.format("'%s' algorithm - nodes evaluated: %s", searcher.getName(), searcher.getNumberOfNodesEvaluated()));
-//Printing Solution Path
+        //Printing Solution Path
                 System.out.println("Solution path:");
         ArrayList<AState> solutionPath = solution.getSolutionPath();
         for (int i = 0; i < solutionPath.size(); i++) {

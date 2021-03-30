@@ -5,6 +5,7 @@ import java.util.*;
 public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     int numOfNodesEvaluated;
+    int sum;
 
     @Override
     public String getName() {
@@ -31,6 +32,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
                 if(!visited.contains(tmp)){
                     visited.add(tmp);
                     List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp,searchingAlgorithm);
+                    if (possibleStates.size() == 0){
+                        tmp.setParentNull();
+                        continue;}
                     for(AState adjacent: possibleStates){
                         adjacent.setParent(tmp);
                         queue.add(adjacent);}
@@ -42,15 +46,20 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         System.out.println("ERROR!!!");
         return null;
         }
+
     private Solution getSolution(AState tmp) {
+        int sum = 0;
         Solution solution = new Solution();
         solution.add(tmp);
+        sum += tmp.getCost();
         this.numOfNodesEvaluated++;
         while (tmp.getParent() != null){
+            sum += tmp.getCost();
             solution.add(tmp.getParent());
             this.numOfNodesEvaluated++;
             tmp = tmp.getParent();
         }
+        System.out.println(sum);
         return solution;
     }
 }

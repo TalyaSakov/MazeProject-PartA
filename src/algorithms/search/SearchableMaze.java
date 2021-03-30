@@ -8,7 +8,6 @@ import java.util.List;
 
 public class SearchableMaze implements ISearchable {
     private Maze maze;
-    private LinkedList<MazeState> m_states;
     String searchingAlgorithm;
 
     public SearchableMaze(Maze maze){
@@ -43,30 +42,29 @@ public class SearchableMaze implements ISearchable {
 
         //Diagonals
         //UpRight
-        if (this.searchingAlgorithm == "BestFS"){
+        if (this.searchingAlgorithm.equals("BestFS")){
             if (curr_state_maze.getRow() >= 1){
                 if (Diagonal_Verification("goUpRight",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
                     Position goUpRight = new Position(curr_state_maze.getRow() - 1, curr_state_maze.getColumn() + 1);
-                    Possible_states.add(new MazeState(goUpRight.getRowIndex(),goUpRight.getColumnIndex(),5));
+                    Possible_states.add(new MazeState(goUpRight.getRowIndex(),goUpRight.getColumnIndex(),15));
                 }
                 if (Diagonal_Verification("goUpLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
                     Position goUpLeft = new Position(curr_state_maze.getRow() - 1 , curr_state_maze.getColumn() -1 );
-                    Possible_states.add(new MazeState(goUpLeft.getRowIndex(),goUpLeft.getColumnIndex(),5));
+                    Possible_states.add(new MazeState(goUpLeft.getRowIndex(),goUpLeft.getColumnIndex(),15));
                 }
 
             }
             if (curr_state_maze.getRow() < maze.getRows() - 1 ) {
                 if (Diagonal_Verification("goDownRight",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
                     Position goDownRight = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn() + 1);
-                    Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex(),5));
+                    Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex(),15));
                 }
                 if (Diagonal_Verification("goDownLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
                     Position goDownLeft = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn() -1);
-                    Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex(),5));
+                    Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex(),15));
                 }
             }
         }
-
 
         //Not diagonals
         if (Non_Diagonal_Verification("goDown",curr_state_maze)){
@@ -90,10 +88,10 @@ public class SearchableMaze implements ISearchable {
     }
 
     public boolean Diagonal_Verification(String str,MazeState curr_state_maze,MazeState next_curr_state){return switch (str) {
-        case "goUpRight" -> Non_Diagonal_Verification("goUp",curr_state_maze) && Non_Diagonal_Verification("goRight",next_curr_state);
-        case "goUpLeft" -> Non_Diagonal_Verification("goUp",curr_state_maze) && Non_Diagonal_Verification("goLeft",next_curr_state);
-        case "goDownRight" -> Non_Diagonal_Verification("goDown",curr_state_maze) && Non_Diagonal_Verification("goRight",next_curr_state);
-        case "goDownLeft" -> Non_Diagonal_Verification("goDown",curr_state_maze) && Non_Diagonal_Verification("goLeft",next_curr_state);
+        case "goUpRight" -> (Non_Diagonal_Verification("goUp",curr_state_maze) || Non_Diagonal_Verification("goRight",curr_state_maze)) && Non_Diagonal_Verification("goRight",next_curr_state);
+        case "goUpLeft" -> (Non_Diagonal_Verification("goUp",curr_state_maze) || Non_Diagonal_Verification("goLeft",curr_state_maze)) && Non_Diagonal_Verification("goLeft",next_curr_state);
+        case "goDownRight" -> ( Non_Diagonal_Verification("goDown",curr_state_maze) || Non_Diagonal_Verification("goRight",curr_state_maze)) && Non_Diagonal_Verification("goRight",next_curr_state) ;
+        case "goDownLeft" -> (Non_Diagonal_Verification("goDown",curr_state_maze)  || Non_Diagonal_Verification("goLeft",curr_state_maze)) && Non_Diagonal_Verification("goLeft",next_curr_state);
         default -> false;
     };}
 

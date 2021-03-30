@@ -34,7 +34,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             if(!visited.contains(tmp)){
                 visited.add(tmp);
                 List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp,"DFS");
-                if (possibleStates.size() == 0){
+                if (possibleStates.size() == 0){ // To avoid turning back
                     tmp.setParentNull();
                     continue;}
                 for(AState n : possibleStates){

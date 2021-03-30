@@ -8,7 +8,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     @Override
     public String getName() {
-        return null;
+        return "Breadth First Search";
     }
 
     @Override
@@ -18,7 +18,6 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     @Override
     public Solution solve(ISearchable specificPuzzle) {
-            System.out.println("BFS SCAN");
             AState startState = specificPuzzle.getStart();
             Queue<AState> queue = new LinkedList<>();
             HashSet<AState> visited = new HashSet<>();
@@ -34,8 +33,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
                         queue.add(adjacent);}
                 }
             }
-        assert queue.peek() != null;
-        if (queue.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){
+        if (queue.peek() != null && queue.peek().equals(specificPuzzle.getEnd().getRow(),specificPuzzle.getEnd().getColumn())){
                 return getSolution(queue.poll());
             }
             return null;

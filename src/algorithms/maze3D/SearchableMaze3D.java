@@ -20,13 +20,13 @@ public class SearchableMaze3D implements ISearchable {
 
         public Maze3DState getStart(){
             Position3D startPosition = maze3D.getStartPosition();
-            return (new Maze3DState(startPosition.getRowIndex(),startPosition.getColumnIndex(),startPosition.getDepthIndex()));
+            return (new Maze3DState(startPosition.getDepthIndex(),startPosition.getRowIndex(),startPosition.getColumnIndex()));
         }
 
         @Override
         public AState getEnd() {
             Position3D goalPosition = maze3D.getGoalPosition();
-            return (new Maze3DState(goalPosition.getRowIndex(),goalPosition.getColumnIndex(),goalPosition.getDepthIndex()));
+            return (new Maze3DState(goalPosition.getDepthIndex(),goalPosition.getRowIndex(),goalPosition.getColumnIndex()));
         }
 
 

@@ -7,6 +7,7 @@ import java.util.Objects;
 
 public class Maze3DState extends AState {
 
+
     private final Position3D current_position;
 
     public int getRow() { return current_position.getRowIndex();}
@@ -54,6 +55,7 @@ public class Maze3DState extends AState {
         public void setParentNull() {
             this.parent = null;
         }
+
 
 
 

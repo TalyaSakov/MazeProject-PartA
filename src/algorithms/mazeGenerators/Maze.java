@@ -26,14 +26,6 @@ public class Maze {
         return maze;
     }
 
-    //    public String toString(){
-//        StringBuilder sb = new StringBuilder();
-//        for(int x=0; x< column ; x++){
-//            for(int y=0; y<rows; y++)
-//                sb.append(maze[x][y]);
-//            sb.append("\n");
-//        }
-//        return sb.toString();}
 
     public String toString(List<MazeState> list) {
         final char PASSAGE_CHAR = '*';

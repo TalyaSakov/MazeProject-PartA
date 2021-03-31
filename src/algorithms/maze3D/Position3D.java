@@ -7,10 +7,17 @@ public class Position3D {
     int column;
     int depth;
 
+    @Override
+    public String toString() {
+        return "Position3D{" +
+                "row=" + row +
+                ", column=" + column +
+                ", depth=" + depth +
+                '}';
+    }
 
-    public Position3D(int depth_maze3D ,int row_maze3D, int column_maze3D){
+    public Position3D(int depth_maze3D , int row_maze3D, int column_maze3D){
         this.depth=depth_maze3D;
-
         this.row=row_maze3D;
         this.column=column_maze3D;
 

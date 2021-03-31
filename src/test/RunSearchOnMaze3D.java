@@ -15,11 +15,15 @@ public class RunSearchOnMaze3D {
 
     public static void main(String[] args) {
         IMazeGenerator3D mg = new MyMaze3DGenerator();
+<<<<<<< HEAD
         Maze3D maze3D = mg.generate(2,5,5);
+=======
+        Maze3D maze3D = mg.generate(5,10,10 );
+>>>>>>> 735882ee538db612e05aac4568de201f8b142f77
         maze3D.print();
         SearchableMaze3D searchable3DMaze = new SearchableMaze3D(maze3D);
         solveProblem(searchable3DMaze, new BreadthFirstSearch());
-//        solveProblem(searchable3DMaze, new DepthFirstSearch());
+        solveProblem(searchable3DMaze, new DepthFirstSearch());
 //        solveProblem(searchable3DMaze, new BestFirstSearch());
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm
@@ -29,7 +33,6 @@ public class RunSearchOnMaze3D {
         System.out.println(String.format("'%s' algorithm - nodes evaluated: %s", searcher.getName(), searcher.getNumberOfNodesEvaluated()));
         //Printing Solution Path
         System.out.println("Solution path:");
-        if (solution.getSolutionPath()==null){ System.out.println("there is no solution to the maze-->we should fix this"); }
         ArrayList<AState> solutionPath = solution.getSolutionPath();
         for (int i = 0; i < solutionPath.size(); i++) {
             System.out.println(String.format("%s. %s",i,solutionPath.get(i)));

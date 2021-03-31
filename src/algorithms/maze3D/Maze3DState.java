@@ -25,7 +25,6 @@ public class Maze3DState extends AState {
             this.current_position = new Position3D(depth, row,column);
         }
 
-
         @Override
         public boolean equals(Object o) {
             if (this == o) return true;
@@ -55,10 +54,6 @@ public class Maze3DState extends AState {
         public void setParentNull() {
             this.parent = null;
         }
-
-
-
-
 
     }
 

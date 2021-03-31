@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Maze3D {
 
-    int[][][] maze3D;
+    int[][][] map;
     Position3D startPosition;
     Position3D goalPosition;
     int depth_maze3D;
@@ -16,7 +16,7 @@ public class Maze3D {
 
 
 
-    public int[][][] getMaze3D(){return maze3D;}
+    public int[][][] getMaze3D(){return map;}
     public Position3D getStartPosition(){return startPosition;}
     public Position3D getGoalPosition(){return goalPosition;}
 
@@ -47,7 +47,7 @@ public class Maze3D {
         for (int depth = 0; depth < depth_maze3D ; depth++) {
             for (int x = 0; x < row_maze3D; x++) {
                 for (int y = 0; y < column_maze3D; y++)
-                    b.append(maze3D[depth][x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                    b.append(map[depth][x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
                 b.append('\n');
             }
             b.append('\n');
@@ -66,15 +66,14 @@ public class Maze3D {
         this.startPosition = new Position3D(0, 0, 0);
         this.goalPosition = new Position3D(0, 0,0);
 
-        maze3D = new int[depth_maze3D][row_maze3D][column_maze3D];
+        map = new int[depth_maze3D][row_maze3D][column_maze3D];
         int i, j,z;
-        for (i = 0; i < this.depth_maze3D ; i++) {
+        for (i = 0; i < this.depth_maze3D; i++) {
             for (j = 0; j < this.row_maze3D ; j++) {
                 for (z=0; z < this.column_maze3D;z++){
-                    maze3D[i][j][z] = 1;
+                    map[i][j][z] = 1;
 
                 }
-
             }
         }
     }

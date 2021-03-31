@@ -43,31 +43,6 @@ public class SearchableMaze3D implements ISearchable {
             List<AState> Possible_states = new ArrayList<>();//Map all the positions around the current state
 
 
-            //Diagonals
-            //UpRight
-            if (curr_state_maze.getRow() >= 1){
-                if (Diagonal_Verification("goUpRight",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
-                    Position goUpRight = new Position(curr_state_maze.getRow() - 1, curr_state_maze.getColumn() + 1);
-                    Possible_states.add(new MazeState(goUpRight.getRowIndex(),goUpRight.getColumnIndex(),15));
-                }
-                if (Diagonal_Verification("goUpLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() -1,curr_state_maze.getColumn()))){
-                    Position goUpLeft = new Position(curr_state_maze.getRow() - 1 , curr_state_maze.getColumn() -1 );
-                    Possible_states.add(new MazeState(goUpLeft.getRowIndex(),goUpLeft.getColumnIndex(),15));
-                }
-
-            }
-            if (curr_state_maze.getRow() < maze.getRows() - 1 ) {
-                if (Diagonal_Verification("goDownRight",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
-                    Position goDownRight = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn() + 1);
-                    Possible_states.add(new MazeState(goDownRight.getRowIndex(),goDownRight.getColumnIndex(),15));
-                }
-                if (Diagonal_Verification("goDownLeft",curr_state_maze,new MazeState(curr_state_maze.getRow() +1,curr_state_maze.getColumn()))){
-                    Position goDownLeft = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn() -1);
-                    Possible_states.add(new MazeState(goDownLeft.getRowIndex(),goDownLeft.getColumnIndex(),15));
-                }
-            }
-
-
             //Not diagonals
             if (Non_Diagonal_Verification("goDown",curr_state_maze)){
                 Position goDown = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn());
@@ -87,6 +62,7 @@ public class SearchableMaze3D implements ISearchable {
             }
             Collections.shuffle(Possible_states);
             return Possible_states;
+
             //floors
             if (floors_Verification("goUpstairs",curr_state_maze)){
                 Position goDown = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn());

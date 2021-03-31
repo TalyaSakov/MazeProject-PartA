@@ -25,6 +25,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     public Solution solve(ISearchable specificPuzzle,Queue<AState> queue) {
             sumCost = 0;
+            if (specificPuzzle==null) return null;
             AState startState = specificPuzzle.getStart();
             HashSet<AState> visited = new HashSet<>();
             queue.add(startState);

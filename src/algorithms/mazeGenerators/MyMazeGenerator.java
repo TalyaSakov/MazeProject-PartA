@@ -53,22 +53,30 @@ public class MyMazeGenerator extends AMazeGenerator {
 
         LinkedList<Integer> endPositions = new LinkedList<>();
         for (int i = 0; i < rows - 1 ; i++) {
-            if (maze.maze[i][column - 2] == 0){
+            if (maze.maze[rows - 2][i] == 0){
                 endPositions.addLast(i);
+            }
+        }
+
+        for (int i = 0; i < rows - 3 ; i++) {
+            if (maze.maze[i][column - 2] == 0){
+                Random rd = new Random();
+                if (rd.nextBoolean()) { maze.maze[i][column-1] = 0;}
             }
         }
 
         int endPos = random.nextInt(endPositions.size());
         endPos = endPositions.get(endPos);
-        maze.maze[endPos][column - 1] = 0;
-        maze.setEndPosition(endPos,rows -1);
+        maze.maze[rows -1][endPos] = 0;
+        maze.setEndPosition(rows -1,endPos);
 
         int startPos = random.nextInt(startPositions.size());
         startPos = startPositions.get(startPos);
         maze.maze[0][startPos] = 0;
         maze.setStartPosition(0,startPos);
 
-
+        System.out.println(maze.getStartPosition());
+        System.out.println(maze.getEndPosition());
         return maze;
     }
 }

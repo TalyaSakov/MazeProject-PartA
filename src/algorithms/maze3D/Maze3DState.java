@@ -14,11 +14,6 @@ public class Maze3DState extends AState {
     public int getColumn() { return current_position.getColumnIndex(); }
     public int getDepth() { return current_position.getDepthIndex();}
 
-    public Maze3DState(int depth, int row, int column ,int cost){
-            super();
-            this.current_position = new Position3D(depth,row,column);
-            this.cost = cost; }
-
 
     public Maze3DState(int depth,int row, int column){
             super();

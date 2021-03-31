@@ -5,7 +5,6 @@ import algorithms.search.AState;
 public class Maze3DState extends AState {
     @Override
     public void setParent(AState parent) {
-
     }
 
     @Override

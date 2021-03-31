@@ -6,18 +6,11 @@ import java.util.Random;
 public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int rows, int column) {
-//        int NewColumn = column -2;
-//        int NewRows = rows -1;
         Maze maze =  new Maze(rows,column);
-//        maze.maze[0][0] = 0;
-//        maze.maze[NewRows-1][NewColumn-1] = 0;
         final LinkedList<int[]> frontiers = new LinkedList<>();
         final Random random = new Random();
-
         int x= ((rows/2));
         int y= (0);
-//        int x = 0 ; //rows
-//        int y = column / 2; //column
         frontiers.add(new int[]{x, y, x, y});
 
         while (!frontiers.isEmpty()) {
@@ -36,15 +29,6 @@ public class MyMazeGenerator extends AMazeGenerator {
                     frontiers.add(new int[]{x, y + 1 , x, y + 2});
             }
         }
-
-//        Maze newMaze = new Maze(rows, column);
-//        for( int i=0; i < rows-2;i++) {
-//            for (int j = 0; j < column -2; j++) {
-//                newMaze.maze[i+1][j+1] = maze.maze[i][j];
-//            }
-//        }
-
-
 
         //fixing the most right
         for (int i = 0; i < rows - 3 ; i++) {

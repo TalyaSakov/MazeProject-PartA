@@ -3,9 +3,9 @@ import java.util.Comparator;
 import java.util.Objects;
 
 public abstract class AState {
-    AState parent;
-    int cost;
-    int sumCost;
+    public AState parent;
+    public int cost;
+    public int sumCost;
 
     public void setSumCost(int sumCost) {
         this.sumCost = sumCost;

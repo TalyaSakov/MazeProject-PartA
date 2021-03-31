@@ -5,10 +5,11 @@ public class Position3D {
     int column;
     int depth;
 
-    public Position3D(int row_maze3D, int column_maze3D, int depth_maze3D){
+    public Position3D(int depth_maze3D ,int row_maze3D, int column_maze3D){
+        this.depth=depth_maze3D;
         this.row=row_maze3D;
         this.column=column_maze3D;
-        this.depth=depth_maze3D;
+
     }
 
     public int getRowIndex() {

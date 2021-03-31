@@ -7,15 +7,16 @@ import java.util.List;
 
 public class Maze3D {
 
-    int[][][] map;
+    int[][][] maze3D;
     Position3D startPosition;
     Position3D goalPosition;
+    int depth_maze3D;
     int row_maze3D;
     int column_maze3D;
-    int depth_maze3D;
 
 
-    public int[][][] getMap(){return map;}
+
+    public int[][][] getMaze3D(){return maze3D;}
     public Position3D getStartPosition(){return startPosition;}
     public Position3D getGoalPosition(){return goalPosition;}
 
@@ -31,11 +32,11 @@ public class Maze3D {
         return depth_maze3D;
     }
 
-    public void setStartPosition(int row_maze3D, int column_maze3D, int depth_maze3D) {
-        startPosition = new Position3D(row_maze3D, column_maze3D,depth_maze3D);
+    public void setStartPosition(int depth_maze3D, int row_maze3D, int column_maze3D) {
+        startPosition = new Position3D(depth_maze3D,row_maze3D, column_maze3D);
     }
-    public void setGoalPositionPosition(int row_maze3D, int column_maze3D, int depth_maze3D) {
-        goalPosition = new Position3D(row_maze3D, column_maze3D,depth_maze3D);
+    public void setGoalPositionPosition(int depth_maze3D, int row_maze3D, int column_maze3D) {
+        goalPosition = new Position3D(depth_maze3D,row_maze3D, column_maze3D);
     }
 
 
@@ -87,18 +88,18 @@ public class Maze3D {
 //    }
 
 
-    public Maze3D(int row_maze3D, int column_maze3D, int depth_maze3D) {
+    public Maze3D(int depth_maze3D,int row_maze3D, int column_maze3D) {
         this.row_maze3D = row_maze3D;
         this.column_maze3D = column_maze3D;
         this.depth_maze3D = depth_maze3D;
         this.startPosition = new Position3D(0, 0, 0);
         this.goalPosition = new Position3D(0, 0,0);
-        map = new int[row_maze3D][column_maze3D][depth_maze3D];
+        maze3D = new int[depth_maze3D][row_maze3D][column_maze3D];
         int i, j,z;
-        for (i = 0; i < this.column_maze3D; i++) {
+        for (i = 0; i < this.depth_maze3D; i++) {
             for (j = 0; j < this.row_maze3D; j++) {
-                for (z=0; z<this.depth_maze3D;z++){
-                    map[j][i][z] = 1;
+                for (z=0; z<this.column_maze3D;z++){
+                    maze3D[j][i][z] = 1;
                 }
 
             }

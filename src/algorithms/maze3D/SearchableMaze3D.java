@@ -62,30 +62,21 @@ public class SearchableMaze3D implements ISearchable {
             }
 
 
-            Collections.shuffle(Possible_states);
-            return Possible_states;
-
             //floors
             if (floors_Verification("goUpstairs",curr_state_maze)){
-                Position goDown = new Position(curr_state_maze.getRow() + 1, curr_state_maze.getColumn());
-                Possible_states.add(new MazeState(goDown.getRowIndex(),goDown.getColumnIndex(),10));
+                Position3D goUpstairs = new Position3D(curr_state_maze.getDepth()+1,curr_state_maze.getRow(), curr_state_maze.getColumn());
+                Possible_states.add(new Maze3DState(goUpstairs.getDepthIndex(),goUpstairs.getRowIndex(),goUpstairs.getColumnIndex()));
             }
-            if (Non_Diagonal_Verification("goUp",curr_state_maze)) {
-                Position goUp = new Position(curr_state_maze.getRow() -1, curr_state_maze.getColumn());
-                Possible_states.add(new MazeState(goUp.getRowIndex(),goUp.getColumnIndex(),10));
+            if (floors_Verification("goDownstairs",curr_state_maze)) {
+                Position3D goDownstairs = new Position3D(curr_state_maze.getDepth()-1,curr_state_maze.getRow(), curr_state_maze.getColumn());
+                Possible_states.add(new Maze3DState(goDownstairs.getDepthIndex(),goDownstairs.getRowIndex(),goDownstairs.getColumnIndex()));
             }
-            if (Non_Diagonal_Verification("goLeft",curr_state_maze)){
-                Position goLeft = new Position(curr_state_maze.getRow(), curr_state_maze.getColumn() -1);
-                Possible_states.add(new MazeState(goLeft.getRowIndex(),goLeft.getColumnIndex(),10));
-            }
-            if (Non_Diagonal_Verification("goRight",curr_state_maze)){
-                Position goRight = new Position(curr_state_maze.getRow(), curr_state_maze.getColumn() + 1);
-                Possible_states.add(new MazeState(goRight.getRowIndex(),goRight.getColumnIndex(),10));
-            }
+
             Collections.shuffle(Possible_states);
             return Possible_states;
 
         }
+
 
 
         public boolean Non_Diagonal_Verification(String str,Maze3DState curr_state_maze){

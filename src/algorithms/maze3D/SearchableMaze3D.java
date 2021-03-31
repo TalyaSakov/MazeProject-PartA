@@ -35,35 +35,31 @@ public class SearchableMaze3D implements ISearchable {
             return getAllPossibleStates(curr_state);
         }
 
-        public List<AState> getAllPossibleStates(AState curr_state){
-            if (!(curr_state instanceof Maze3DState)){
+        public List<AState> getAllPossibleStates(AState curr_state) {
+            if (!(curr_state instanceof Maze3DState)) {
                 return null;
             }
-            Maze3DState curr_state_maze = (Maze3DState)curr_state;
+            Maze3DState curr_state_maze = (Maze3DState) curr_state;
             List<AState> Possible_states = new ArrayList<>();//Map all the positions around the current state
 
 
             //Not diagonals
-            if (Non_Diagonal_Verification("goDown",curr_state_maze)){
-                Position3D goDown = new Position3D(curr_state_maze.getDepth(),curr_state_maze.getRow() + 1, curr_state_maze.getColumn());
-                Possible_states.add(new Maze3DState(goDown.getDepthIndex(),goDown.getRowIndex(),goDown.getColumnIndex()));
+            if (Non_Diagonal_Verification("goDown", curr_state_maze)) {
+                Position3D goDown = new Position3D(curr_state_maze.getDepth(), curr_state_maze.getRow() + 1, curr_state_maze.getColumn());
+                Possible_states.add(new Maze3DState(goDown.getDepthIndex(), goDown.getRowIndex(), goDown.getColumnIndex()));
             }
-            if (Non_Diagonal_Verification("goUp",curr_state_maze)) {
-                Position3D goUp = new Position3D(curr_state_maze.getDepth(),curr_state_maze.getRow() -1, curr_state_maze.getColumn());
-                Possible_states.add(new Maze3DState(goUp.getDepthIndex(),goUp.getRowIndex(),goUp.getColumnIndex()));
+            if (Non_Diagonal_Verification("goUp", curr_state_maze)) {
+                Position3D goUp = new Position3D(curr_state_maze.getDepth(), curr_state_maze.getRow() - 1, curr_state_maze.getColumn());
+                Possible_states.add(new Maze3DState(goUp.getDepthIndex(), goUp.getRowIndex(), goUp.getColumnIndex()));
             }
-            if (Non_Diagonal_Verification("goLeft",curr_state_maze)){
-                Position3D goLeft = new Position3D(curr_state_maze.getDepth(),curr_state_maze.getRow(), curr_state_maze.getColumn() -1);
-                Possible_states.add(new Maze3DState(goLeft.getDepthIndex(),goLeft.getRowIndex(),goLeft.getColumnIndex()));
+            if (Non_Diagonal_Verification("goLeft", curr_state_maze)) {
+                Position3D goLeft = new Position3D(curr_state_maze.getDepth(), curr_state_maze.getRow(), curr_state_maze.getColumn() - 1);
+                Possible_states.add(new Maze3DState(goLeft.getDepthIndex(), goLeft.getRowIndex(), goLeft.getColumnIndex()));
             }
-            if (Non_Diagonal_Verification("goRight",curr_state_maze)){
-                Position3D goRight = new Position3D(curr_state_maze.getDepth(),curr_state_maze.getRow(), curr_state_maze.getColumn() + 1);
-                Possible_states.add(new Maze3DState(goRight.getDepthIndex(),goRight.getRowIndex(),goRight.getColumnIndex()));
+            if (Non_Diagonal_Verification("goRight", curr_state_maze)) {
+                Position3D goRight = new Position3D(curr_state_maze.getDepth(), curr_state_maze.getRow(), curr_state_maze.getColumn() + 1);
+                Possible_states.add(new Maze3DState(goRight.getDepthIndex(), goRight.getRowIndex(), goRight.getColumnIndex()));
             }
-
-
-            Collections.shuffle(Possible_states);
-            return Possible_states;
 
             //floors
             if (floors_Verification("goUpstairs",curr_state_maze)){
@@ -82,6 +78,7 @@ public class SearchableMaze3D implements ISearchable {
                 Position goRight = new Position(curr_state_maze.getRow(), curr_state_maze.getColumn() + 1);
                 Possible_states.add(new MazeState(goRight.getRowIndex(),goRight.getColumnIndex(),10));
             }
+
             Collections.shuffle(Possible_states);
             return Possible_states;
 

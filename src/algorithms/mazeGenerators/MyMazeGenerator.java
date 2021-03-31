@@ -4,6 +4,13 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class MyMazeGenerator extends AMazeGenerator {
+
+    boolean makeStartAndEnd = true;
+
+    public Maze generate(int rows, int column, boolean makeStartAndEnd) {
+        this.makeStartAndEnd = makeStartAndEnd;
+        return generate(rows, column);
+    }
     @Override
     public Maze generate(int rows, int column) {
         Maze maze =  new Maze(rows,column);
@@ -55,29 +62,36 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
 
-        LinkedList<Integer> startPositions = new LinkedList<>();
-        for (int i = 0; i < column - 1 ; i++) {
-            if (maze.maze[1][i] == 0){
-                startPositions.addLast(i);
+
+
+        if (makeStartAndEnd) {
+
+            LinkedList<Integer> startPositions = new LinkedList<>();
+            for (int i = 0; i < column - 1; i++) {
+                if (maze.maze[1][i] == 0) {
+                    startPositions.addLast(i);
+                }
             }
-        }
 
-        LinkedList<Integer> endPositions = new LinkedList<>();
-        for (int i = 0; i < rows - 1 ; i++) {
-            if (maze.maze[rows - 2][i] == 0){
-                endPositions.addLast(i);
+            LinkedList<Integer> endPositions = new LinkedList<>();
+            for (int i = 0; i < rows - 1; i++) {
+                if (maze.maze[rows - 2][i] == 0) {
+                    endPositions.addLast(i);
+                }
             }
+
+
+            int endPos = random.nextInt(endPositions.size());
+            endPos = endPositions.get(endPos);
+            maze.maze[rows - 1][endPos] = 0;
+            maze.setEndPosition(rows - 1, endPos);
+
+            int startPos = random.nextInt(startPositions.size());
+            startPos = startPositions.get(startPos);
+            maze.maze[0][startPos] = 0;
+            maze.setStartPosition(0, startPos);
+
         }
-
-        int endPos = random.nextInt(endPositions.size());
-        endPos = endPositions.get(endPos);
-        maze.maze[rows -1][endPos] = 0;
-        maze.setEndPosition(rows -1,endPos);
-
-        int startPos = random.nextInt(startPositions.size());
-        startPos = startPositions.get(startPos);
-        maze.maze[0][startPos] = 0;
-        maze.setStartPosition(0,startPos);
 
         return maze;
     }

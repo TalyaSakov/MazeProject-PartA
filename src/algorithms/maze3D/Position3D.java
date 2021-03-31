@@ -1,5 +1,7 @@
 package algorithms.maze3D;
 
+import java.util.Objects;
+
 public class Position3D {
     int row;
     int column;
@@ -12,6 +14,21 @@ public class Position3D {
         this.row=row_maze3D;
         this.column=column_maze3D;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position3D that = (Position3D) o;
+        return row == that.row &&
+                column == that.column &&
+                depth == that.depth;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column, depth);
     }
 
     public int getRowIndex() {

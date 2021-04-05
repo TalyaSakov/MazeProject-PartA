@@ -1,11 +1,12 @@
 package algorithms.search;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
 public class Solution {
-    private ArrayList<AState> path;
+    private final ArrayList<AState> path;
 
     public Solution() {
         this.path = new ArrayList<AState>();
@@ -24,7 +25,9 @@ public class Solution {
                 '}';
     }
 
-    public ArrayList<AState> getSolutionPath() {
+    public ArrayList<AState> getSolutionPath()
+    {
+        Collections.reverse(path);
         return path;
     }
 }

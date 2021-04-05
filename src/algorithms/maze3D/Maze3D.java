@@ -41,17 +41,38 @@ public class Maze3D {
 
 
     public String toString() {
-        final char PASSAGE_CHAR = '*';
-        final char WALL_CHAR = 'X';
+        final char PASSAGE_CHAR = '0';
+        final char WALL_CHAR = '1';
+        final char START_CHAR = 'S';
+        final char END_CHAR = 'E';
         final StringBuffer b = new StringBuffer();
+        b.append('{');
+        b.append('\n');
         for (int depth = 0; depth < depth_maze3D ; depth++) {
             for (int x = 0; x < row_maze3D; x++) {
+                b.append("{ ");
                 for (int y = 0; y < column_maze3D; y++)
-                    b.append(map[depth][x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                    if (x == startPosition.row && y == startPosition.column && depth == startPosition.depth){
+                        b.append(START_CHAR);
+                        b.append(' ');}
+                    else if (x == goalPosition.row && y == goalPosition.column && depth == goalPosition.depth){
+                        b.append(END_CHAR);
+                        b.append(' ');}
+                    else{
+                        b.append(map[depth][x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                        b.append(' ');}
+                b.append("}");
                 b.append('\n');
             }
-            b.append('\n');
+            if (depth < depth_maze3D - 1){
+                for (int i = 0; i < (column_maze3D - 1) *2 +5 ; i++) {
+                    b.append('-');
+
+                }
+                b.append('\n');
+            }
         }
+        b.append('}');
         return b.toString();
     }
 

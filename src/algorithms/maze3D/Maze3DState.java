@@ -30,9 +30,7 @@ public class Maze3DState extends AState {
 
         @Override
         public String toString() {
-            return "Maze3DState{" +
-                    current_position +
-                    '}';
+            return current_position.toString();
         }
         @Override
         public int hashCode() {

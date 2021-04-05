@@ -9,10 +9,10 @@ public class Position3D {
 
     @Override
     public String toString() {
-        return "Position3D{" +
-                "row=" + row +
-                ", column=" + column +
-                ", depth=" + depth +
+        return "{" +
+                + depth +
+                ","+ row +
+                ","+ column +
                 '}';
     }
 

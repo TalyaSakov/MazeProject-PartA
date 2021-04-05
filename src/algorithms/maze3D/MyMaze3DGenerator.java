@@ -7,11 +7,12 @@ import java.util.Random;
 
 public class MyMaze3DGenerator extends AMaze3DGenerator {
     @Override
-    public Maze3D generate(int depth, int row, int column) {
-        Maze3D maze3D = new Maze3D(depth, row, column);
+    public Maze3D generate(int depth, int rows, int column) {
+        if (rows < 2 || column < 2 || depth < 1){throw new RuntimeException("Maze must be greater then 1X2X2");}
+        Maze3D maze3D = new Maze3D(depth, rows, column);
         MyMazeGenerator mazeGenerator = new MyMazeGenerator();
         for (int i = 0; i < depth; i++) {
-            maze3D.map[i] = mazeGenerator.generate(row, column, false).getMaze();
+            maze3D.map[i] = mazeGenerator.generate(rows, column, false).getMaze();
         }
         generateStartAndFinish(maze3D);
         return maze3D;

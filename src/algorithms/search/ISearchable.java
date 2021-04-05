@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ISearchable {
 
-    public List<AState> getAllPossibleStates(AState curr_state);
+    public List<AState> getAllSuccessors(AState curr_state);
 
     public AState getStart();
 

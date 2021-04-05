@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SearchableMaze implements ISearchable {
     private Maze maze;
-    String searchingAlgorithm;
 
     public SearchableMaze(Maze maze){
         this.maze = maze;
@@ -27,12 +26,7 @@ public class SearchableMaze implements ISearchable {
     }
 
 
-    public List<AState> getAllPossibleStates(AState curr_state,String searchingAlgorithm){
-        this.searchingAlgorithm = searchingAlgorithm;
-        return getAllPossibleStates(curr_state);
-    }
-
-    public List<AState> getAllPossibleStates(AState curr_state){
+    public List<AState> getAllSuccessors(AState curr_state){
         if (!(curr_state instanceof MazeState)){
             return null;
         }

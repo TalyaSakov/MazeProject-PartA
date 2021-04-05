@@ -1,7 +1,6 @@
 package algorithms.mazeGenerators;
 
-import java.util.LinkedList;
-import java.util.Random;
+import java.util.*;
 
 public class MyMazeGenerator extends AMazeGenerator {
 
@@ -14,7 +13,7 @@ public class MyMazeGenerator extends AMazeGenerator {
     @Override
     public Maze generate(int rows, int column) {
         Maze maze =  new Maze(rows,column);
-        final LinkedList<int[]> frontiers = new LinkedList<>();
+        final ArrayList<int[]> frontiers = new ArrayList<>();
         final Random random = new Random();
         int x= ((rows/2));
         int y= (0);
@@ -22,6 +21,7 @@ public class MyMazeGenerator extends AMazeGenerator {
 
         while (!frontiers.isEmpty()) {
             final int[] f = frontiers.remove(random.nextInt(frontiers.size()));
+//            final int[] f = frontiers.pop();
             x = f[2];
             y = f[3];
             if (maze.maze[x][y] == 1) {
@@ -54,7 +54,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
 
-        if (makeStartAndEnd) {
+        if (makeStartAndEnd) { //2d
 
             LinkedList<Integer> startPositions = new LinkedList<>();
             for (int i = 0; i < column - 1; i++) {
@@ -64,7 +64,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
 
             LinkedList<Integer> endPositions = new LinkedList<>();
-            for (int i = 0; i < rows - 1; i++) {
+            for (int i = 0; i < column - 1; i++) {
                 if (maze.maze[rows - 2][i] == 0) {
                     endPositions.addLast(i);
                 }

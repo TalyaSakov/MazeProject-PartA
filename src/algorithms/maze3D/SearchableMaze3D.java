@@ -30,12 +30,12 @@ public class SearchableMaze3D implements ISearchable {
         }
 
 
-        public List<AState> getAllPossibleStates(AState curr_state,String searchingAlgorithm){
+        public List<AState> getAllSuccessors(AState curr_state,String searchingAlgorithm){
             this.searchingAlgorithm = searchingAlgorithm;
-            return getAllPossibleStates(curr_state);
+            return getAllSuccessors(curr_state);
         }
 
-        public List<AState> getAllPossibleStates(AState curr_state) {
+        public List<AState> getAllSuccessors(AState curr_state) {
             if (!(curr_state instanceof Maze3DState)) {
                 return null;
             }

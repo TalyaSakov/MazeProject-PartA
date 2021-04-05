@@ -12,7 +12,7 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
     @Override
     public Maze generate(int rows, int column) {
-
+        if (rows < 2 || column < 2){throw new RuntimeException("Maze must be greater then 2X2");}
         Maze maze =  new Maze(rows,column);
         final ArrayList<int[]> frontiers = new ArrayList<>();
         final Random random = new Random();

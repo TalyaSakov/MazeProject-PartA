@@ -27,60 +27,27 @@ public class Maze {
     }
 
 
-    public String toString(List<MazeState> list) {
-        final char PASSAGE_CHAR = '0';
-        final char WALL_CHAR = '1';
-        final char MARKED_CHAR = 'S';
-        boolean[][] markedMaze;
-        markedMaze = new boolean[this.getRows()][this.getColumn()];
-        for (int i = 0; i < list.size(); i++) {
-            int col = list.get(i).getColumn();
-            int row = list.get(i).getRow();
-            markedMaze[row][col] = true;
-        }
-        final StringBuffer b = new StringBuffer();
-//        for ( int x = 0; x < column + 2; x++ )
-//            b.append( WALL_CHAR );
-//        b.append( '\n' );
-        for (int x = 0; x < rows; x++) {
-//            b.append( WALL_CHAR );
-            for (int y = 0; y < column; y++)
-                if (markedMaze[x][y] == true) {
-                    b.append(MARKED_CHAR);
-                } else {
-                    b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
-                }
-//            b.append( WALL_CHAR );
-            b.append('\n');
-        }
-//        for ( int x = 0; x < column + 2; x++ )
-//            b.append( WALL_CHAR );
-        b.append('\n');
-        return b.toString();
-    }
-
     public String toString() {
         final char PASSAGE_CHAR = '0';
         final char WALL_CHAR = '1';
         final char START_CHAR = 'S';
         final char END_CHAR = 'E';
         final StringBuffer b = new StringBuffer();
-//        for ( int x = 0; x < column + 2; x++ )
-//            b.append( WALL_CHAR );
-//        b.append( '\n' );
-
-
             for (int x = 0; x < rows; x++) {
-//            b.append( WALL_CHAR );
+            b.append("{ ");
                 for (int y = 0; y < column; y++) {
-                    if (x == start_position.row && y == start_position.column)
+                    if (x == start_position.row && y == start_position.column){
                         b.append(START_CHAR);
-                    else if (x == end_position.row && y == end_position.column)
+                        b.append(' ');}
+                    else if (x == end_position.row && y == end_position.column){
                         b.append(END_CHAR);
-                    else
+                        b.append(' ');}
+                    else{
                         b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                        b.append(' ');}
                 }
 //            b.append( WALL_CHAR );
+                b.append("}");
                 b.append('\n');
             }
 //        for ( int x = 0; x < column + 2; x++ )

@@ -13,7 +13,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public String getName() {
-        return "Depth First Search";
+        return "DepthFirstSearch";
     }
 
     @Override
@@ -23,7 +23,6 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 
     @Override
     public Solution solve(ISearchable specificPuzzle) {
-        System.out.println("DFS SCAN");
         AState startState = specificPuzzle.getStart();
         Stack<AState> stack = new Stack<>();
         HashSet<AState> visited = new HashSet<>();
@@ -33,14 +32,13 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
             AState tmp = stack.pop();
             if(!visited.contains(tmp)){
                 visited.add(tmp);
-                List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp);
+                List<AState> possibleStates = specificPuzzle.getAllSuccessors(tmp);
                 if (possibleStates.size() == 0){ // To avoid turning back
                     tmp.setParentNull();
                     continue;}
                 for(AState n : possibleStates){
                     n.setParent(tmp);
                     stack.push(n);}
-
             }
         }
         if (stack.peek().equals(specificPuzzle.getEnd())){

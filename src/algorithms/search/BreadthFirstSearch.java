@@ -36,7 +36,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
                     visited.add(tmp);
                     sumCost += tmp.getCost();
 //                    System.out.println(tmp);
-                    List<AState> possibleStates = specificPuzzle.getAllPossibleStates(tmp);
+                    List<AState> possibleStates = specificPuzzle.getAllSuccessors(tmp);
                     if (possibleStates.size() == 0){
                         sumCost -= tmp.getSumCost();
                         tmp.setParentNull();

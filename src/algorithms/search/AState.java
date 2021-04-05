@@ -10,15 +10,12 @@ public abstract class AState {
     public void setSumCost(int sumCost) {
         this.sumCost = sumCost;
     }
-
     public void setCost(int cost) {
         this.cost = cost;
     }
-
     public int getSumCost() {
         return sumCost;
     }
-
     public int getCost() {
         return cost;
     }

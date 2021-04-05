@@ -53,8 +53,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         System.out.println("ERROR!!!");
         return null;
         }
-
-    private Solution getSolution(AState tmp) {
+    @Override
+    public Solution getSolution(AState tmp) {
         int sum = 0;
         Solution solution = new Solution();
         solution.add(tmp);

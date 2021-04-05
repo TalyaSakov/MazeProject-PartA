@@ -47,15 +47,15 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return null;
     }
 
-    private Solution getSolution(AState tmp) {
-        Solution solution = new Solution();
-        solution.add(tmp);
-        this.numOfNodesEvaluated++;
-        while (tmp.getParent() != null){
-            solution.add(tmp.getParent());
-            this.numOfNodesEvaluated++;
-            tmp = tmp.getParent();
-        }
-        return solution;
-    }
+//    private Solution getSolution(AState tmp) {
+//        Solution solution = new Solution();
+//        solution.add(tmp);
+//        this.numOfNodesEvaluated++;
+//        while (tmp.getParent() != null){
+//            solution.add(tmp.getParent());
+//            this.numOfNodesEvaluated++;
+//            tmp = tmp.getParent();
+//        }
+//        return solution;
+//    }
 }

@@ -8,6 +8,7 @@ import java.util.Random;
 public class MyMaze3DGenerator extends AMaze3DGenerator {
     @Override
     public Maze3D generate(int depth, int rows, int column) {
+        //values under 2X2 do not allow us to build a proper maze- exception will be throw
         if (rows < 2 || column < 2 || depth < 1){throw new RuntimeException("Maze must be greater then 1X2X2");}
         Maze3D maze3D = new Maze3D(depth, rows, column);
         MyMazeGenerator mazeGenerator = new MyMazeGenerator();

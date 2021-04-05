@@ -15,12 +15,14 @@ public class SearchableMaze implements ISearchable {
     }
 
     public AState getStart(){
+        if (this.maze==null) return null;
         Position startPosition = maze.getStartPosition();
         return (new MazeState(startPosition.getRowIndex(),startPosition.getColumnIndex()));
     }
 
     @Override
     public AState getEnd() {
+        if (this.maze.getEndPosition()==null) return null;
         Position endPosition = maze.getEndPosition();
         return (new MazeState(endPosition.getRowIndex(),endPosition.getColumnIndex()));
     }

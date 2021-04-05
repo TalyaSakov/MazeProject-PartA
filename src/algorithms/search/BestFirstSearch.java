@@ -22,6 +22,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
                 return Integer.compare(s1.getSumCost(), s2.getSumCost());
             }
         }
+        if(specificPuzzle==null)return null;
         PriorityQueue<AState> PQ = new PriorityQueue<AState>(new AStateComparerator());
         return super.solve(specificPuzzle,PQ);
     }

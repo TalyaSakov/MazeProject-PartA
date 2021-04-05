@@ -77,6 +77,7 @@ public class SearchableMaze3D implements ISearchable {
         }
 
 
+
         public boolean Non_Diagonal_Verification(String str,Maze3DState curr_state_maze){
             return switch (str) {
                 case "goUp" -> (curr_state_maze.getRow() >= 1 && this.maze3D.getMaze3D()[curr_state_maze.getDepth()][curr_state_maze.getRow()-1][curr_state_maze.getColumn()] == 0);

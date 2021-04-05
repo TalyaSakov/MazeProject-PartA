@@ -28,8 +28,8 @@ public class Maze {
 
 
     public String toString(List<MazeState> list) {
-        final char PASSAGE_CHAR = '*';
-        final char WALL_CHAR = 'X';
+        final char PASSAGE_CHAR = '0';
+        final char WALL_CHAR = '1';
         final char MARKED_CHAR = 'S';
         boolean[][] markedMaze;
         markedMaze = new boolean[this.getRows()][this.getColumn()];
@@ -60,24 +60,36 @@ public class Maze {
     }
 
     public String toString() {
-        final char PASSAGE_CHAR = '*';
-        final char WALL_CHAR = 'X';
+        final char PASSAGE_CHAR = '0';
+        final char WALL_CHAR = '1';
+        final char START_CHAR = 'S';
+        final char END_CHAR = 'E';
         final StringBuffer b = new StringBuffer();
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
 //        b.append( '\n' );
-        for (int x = 0; x < rows; x++) {
+
+
+            for (int x = 0; x < rows; x++) {
 //            b.append( WALL_CHAR );
-            for (int y = 0; y < column; y++)
-                b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                for (int y = 0; y < column; y++) {
+                    if (x == start_position.row && y == start_position.column)
+                        b.append(START_CHAR);
+                    else if (x == end_position.row && y == end_position.column)
+                        b.append(END_CHAR);
+                    else
+                        b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                }
 //            b.append( WALL_CHAR );
-            b.append('\n');
-        }
+                b.append('\n');
+            }
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
-        b.append('\n');
-        return b.toString();
-    }
+
+
+            b.append('\n');
+            return b.toString();
+        }
 
 
     public Maze(int rows, int column) {
@@ -107,11 +119,13 @@ public class Maze {
 
     public Position getEndPosition() {
         return end_position;
+
     }
 
 
     public Position getStartPosition() {
         return start_position;
+
     }
 }
 

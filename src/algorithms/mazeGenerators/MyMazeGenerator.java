@@ -12,6 +12,7 @@ public class MyMazeGenerator extends AMazeGenerator {
     }
     @Override
     public Maze generate(int rows, int column) {
+
         Maze maze =  new Maze(rows,column);
         final ArrayList<int[]> frontiers = new ArrayList<>();
         final Random random = new Random();

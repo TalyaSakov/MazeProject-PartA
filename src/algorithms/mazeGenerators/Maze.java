@@ -61,7 +61,6 @@ public class Maze {
 //        for ( int x = 0; x < column + 2; x++ )
 //            b.append( WALL_CHAR );
 
-
             b.append('\n');
             return b.toString();
         }

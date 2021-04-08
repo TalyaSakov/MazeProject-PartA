@@ -40,52 +40,12 @@ public class Maze3D {
     }
 
 
-    public String toString() {
-        //display the maze as a string based on the values ​​in it
-        final char PASSAGE_CHAR = '0';
-        final char WALL_CHAR = '1';
-        final char START_CHAR = 'S';
-        final char END_CHAR = 'E';
-        final StringBuffer b = new StringBuffer();
-        b.append('{');
-        b.append('\n');
-        //running over the matrix values ​,
-        // we will mark a wall and a passage as 1 and 0 respectively.
-        // In addition we will identify the start and goal positions and mark them accordingly
-        for (int depth = 0; depth < depth_maze3D ; depth++) {
-            for (int x = 0; x < row_maze3D; x++) {
-                b.append("{ ");
-                for (int y = 0; y < column_maze3D; y++)
-                    //checking if it's a start position
-                    if (x == startPosition.row && y == startPosition.column && depth == startPosition.depth){
-                        b.append(START_CHAR);
-                        b.append(' ');}
-                    //checking if it's a goal position
-                    else if (x == goalPosition.row && y == goalPosition.column && depth == goalPosition.depth){
-                        b.append(END_CHAR);
-                        b.append(' ');}
-                    //checking if it's a wall or passage
-                    else{
-                        b.append(map[depth][x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
-                        b.append(' ');}
-                b.append("}");
-                b.append('\n');
-            }
-            if (depth < depth_maze3D - 1){
-                for (int i = 0; i < (column_maze3D - 1) *2 +5 ; i++) {
-                    b.append('-');
-
-                }
-                b.append('\n');
-            }
-        }
-        b.append('}');
-        return b.toString();
-    }
-
-
-
-
+    /**
+     * Function description
+     * @param depth_maze3D
+     * @param row_maze3D
+     * @param column_maze3D
+     */
     public Maze3D(int depth_maze3D,int row_maze3D, int column_maze3D) {
     //constructor -build the maze with walls only, start and goal positions
         this.row_maze3D = row_maze3D;
@@ -100,14 +60,37 @@ public class Maze3D {
             for (j = 0; j < this.row_maze3D ; j++) {
                 for (z=0; z < this.column_maze3D;z++){
                     map[i][j][z] = 1;
-
                 }
             }
         }
     }
 
     public void print() {
-        System.out.println(this);
+            System.out.println("{");
+            for(int depth = 0; depth < map.length; depth++){
+                for(int row = 0; row < map[0].length; row++) {
+                    System.out.print("{ ");
+                    for (int col = 0; col < map[0][0].length; col++) {
+                        if (depth == startPosition.getDepthIndex() && row == startPosition.getRowIndex() && col == startPosition.getColumnIndex()) // if the position is the start - mark with S
+                            System.out.print("S ");
+                        else {
+                            if (depth == goalPosition.getDepthIndex() && row == goalPosition.getRowIndex() && col == goalPosition.getColumnIndex()) // if the position is the goal - mark with E
+                                System.out.print("E ");
+                            else
+                                System.out.print(map[depth][row][col] + " ");
+                        }
+                    }
+                    System.out.println("}");
+                }
+                if(depth < map.length - 1) {
+                    System.out.print("---");
+                    for (int i = 0; i < map[0][0].length; i++)
+                        System.out.print("--");
+                    System.out.println();
+                }
+            }
+            System.out.println("}");
+        }
     }
 
-}
+

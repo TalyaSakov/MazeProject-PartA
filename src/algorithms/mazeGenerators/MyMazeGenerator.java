@@ -39,13 +39,13 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         Random rd = new Random();
         //fixing the most right
-        for (int i = 0; i < rows - 3 ; i++) {
+        for (int i = 0; i < rows - 1 ; i++) {
             if (maze.maze[i][column - 2] == 0){
                 if (rd.nextBoolean()) { maze.maze[i][column-1] = 0;}
             }
         }
 
-        for (int i = 0; i < column - 3 ; i++) {
+        for (int i = 0; i < column - 1 ; i++) {
             if (maze.maze[1][i] == 0 && maze.maze[0][i] == 1){ //fixing the most up
                 if (rd.nextBoolean()) { maze.maze[0][i] = 0;}
             }

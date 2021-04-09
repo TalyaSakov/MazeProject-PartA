@@ -38,12 +38,12 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
 //                    System.out.println(tmp);
                     List<AState> possibleStates = specificPuzzle.getAllSuccessors(tmp);
                     if (possibleStates.size() == 0){
-                        sumCost -= tmp.getSumCost();
+                        sumCost -= tmp.getAccumulatedCost();
                         tmp.setParentNull();
                         continue;}
                     for(AState adjacent: possibleStates){
                         adjacent.setParent(tmp);
-                        adjacent.setSumCost(sumCost + adjacent.getCost());
+                        adjacent.setAccumulatedCost(sumCost + adjacent.getCost());
                         queue.add(adjacent);}
                 }
             }

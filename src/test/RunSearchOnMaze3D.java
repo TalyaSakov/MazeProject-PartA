@@ -18,8 +18,8 @@ public class RunSearchOnMaze3D {
         maze3D.print();
         SearchableMaze3D searchable3DMaze = new SearchableMaze3D(maze3D);
         solveProblem(searchable3DMaze, new BreadthFirstSearch());
-//        solveProblem(searchable3DMaze, new DepthFirstSearch());
-//        solveProblem(searchable3DMaze, new BestFirstSearch());
+        solveProblem(searchable3DMaze, new DepthFirstSearch());
+        solveProblem(searchable3DMaze, new BestFirstSearch());
     }
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm
             searcher) {

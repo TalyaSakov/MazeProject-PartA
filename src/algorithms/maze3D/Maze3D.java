@@ -15,33 +15,66 @@ public class Maze3D {
     int column_maze3D;
 
 
+    /**
+     * @return the maze's map field.
+     */
+    public int[][][] getMaze3DMap(){return map;}
 
-    public int[][][] getMaze3D(){return map;}
+    /**
+     * @return the maze's start Position (Position3D class).
+     */
     public Position3D getStartPosition(){return startPosition;}
+
+    /**
+     * @return the maze's end Position (Position3D class).
+     */
     public Position3D getGoalPosition(){return goalPosition;}
 
+    /**
+     * @return the maze's row amount.
+     */
     public int getRow_maze3D() {
         return row_maze3D;
     }
 
+    /**
+     * @return the maze's column amount.
+     */
     public int getColumn_maze3D() {
         return column_maze3D;
     }
 
+    /**
+     * @return the maze's depth.
+     */
     public int getDepth_maze3D() {
         return depth_maze3D;
     }
 
+    /**
+     * Make a new Position3D instance and make it as the startPosition field.
+     * @param depth_maze3D - Start position depth.
+     * @param row_maze3D - Start position row.
+     * @param column_maze3D - Start position column.
+     */
     public void setStartPosition(int depth_maze3D, int row_maze3D, int column_maze3D) {
         startPosition = new Position3D(depth_maze3D,row_maze3D, column_maze3D);
     }
+
+    /**
+     * Make a new Position3D instance and make it as the goalPosition field.
+     * @param depth_maze3D - Goal position depth.
+     * @param row_maze3D - Goal position row.
+     * @param column_maze3D - Goal position column.
+     */
     public void setGoalPositionPosition(int depth_maze3D, int row_maze3D, int column_maze3D) {
         goalPosition = new Position3D(depth_maze3D,row_maze3D, column_maze3D);
     }
 
 
     /**
-     * Function description
+     * Maze3D class default constactur.
+     * initializing fields and make the maze full of 1's.
      * @param depth_maze3D
      * @param row_maze3D
      * @param column_maze3D
@@ -65,6 +98,9 @@ public class Maze3D {
         }
     }
 
+    /**
+     * Given by the course practice.
+     */
     public void print() {
             System.out.println("{");
             for(int depth = 0; depth < map.length; depth++){

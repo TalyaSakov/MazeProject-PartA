@@ -1,7 +1,6 @@
 package algorithms.search;
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class BestFirstSearch extends BreadthFirstSearch {
     @Override
@@ -19,7 +18,7 @@ public class BestFirstSearch extends BreadthFirstSearch {
         class AStateComparerator implements Comparator<AState> {
             @Override
             public int compare(AState s1, AState s2) {
-                return Integer.compare(s1.getSumCost(), s2.getSumCost());
+                return Integer.compare(s1.getAccumulatedCost(), s2.getAccumulatedCost());
             }
         }
         if(specificPuzzle==null)return null;

@@ -15,6 +15,7 @@ public class RunMaze3DGenerator {
 // generate another maze
 
             Maze3D maze = myMaze3DGenerator.generate(3,3,3);
+
 // prints the maze
             maze.print();
 // get the maze entrance

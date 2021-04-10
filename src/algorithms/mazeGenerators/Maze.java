@@ -26,22 +26,25 @@ public class Maze {
         return maze;
     }
 
-
+    /**
+     *
+     * @return display the maze as a string based on the values ​​in it.
+     * we will run on the maze cells. Cells with a value of 1 will be defined as walls and mark with char 1, otherwise they will mark as passage with char 0
+     * start position and end position would mark as S and E respectively
+     *
+     */
     public String toString() {
-        //display the maze as a string based on the values ​​in it
+        //
         final char PASSAGE_CHAR = '0';
         final char WALL_CHAR = '1';
         final char START_CHAR = 'S';
         final char END_CHAR = 'E';
         final StringBuffer b = new StringBuffer();
-        //running over the matrix values ​,
-        // we will mark a wall and a passage as 1 and 0 respectively.
-        // In addition we will identify the start and goal positions and mark them accordingly
 
         for (int x = 0; x < rows; x++) {
             b.append("{ ");
                 for (int y = 0; y < column; y++) {
-                    //checking if it's a start position
+
                     if (x == start_position.row && y == start_position.column){
                         b.append(START_CHAR);
                         b.append(' ');}
@@ -65,7 +68,11 @@ public class Maze {
             return b.toString();
         }
 
-
+    /**
+     * constructor - build new maze from a given size
+     * @param rows -number of row in the new maze
+     * @param column- number of colmun in the new maze
+     */
     public Maze(int rows, int column) {
         //constructor - build the maze with walls only, start and goal positions
         this.rows = rows;

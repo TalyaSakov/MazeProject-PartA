@@ -16,11 +16,12 @@ public class MyMaze3DGenerator extends AMaze3DGenerator {
         return maze3D;
     }
 
-    private void generate2D(int rows,int column, int[][] layer) {
+    private void generate2D(int rows,int column, int[][] layer){
         final ArrayList<int[]> frontiers = new ArrayList<>();
         final Random random = new Random();
-        int x = ((rows / 2));
-        int y = (0);
+        int x= ((rows/2));
+        int y= (0);
+
         frontiers.add(new int[]{x, y, x, y});
 
         while (!frontiers.isEmpty()) {
@@ -34,41 +35,32 @@ public class MyMaze3DGenerator extends AMaze3DGenerator {
                 if (y >= 2 && layer[x][y - 2] == 1)
                     frontiers.add(new int[]{x, y - 1, x, y - 2});
                 if (x < rows - 2 && layer[x + 2][y] == 1)
-                    frontiers.add(new int[]{x + 1, y, x + 2, y});
+
+                    frontiers.add(new int[]{x + 1 , y, x + 2, y});
                 if (y < column - 2 && layer[x][y + 2] == 1)
-                    frontiers.add(new int[]{x, y + 1, x, y + 2});
+                    frontiers.add(new int[]{x, y + 1 , x, y + 2});
+
             }
         }
         Random rd = new Random();
         //fixing the most right
-        for (int i = 0; i < rows - 3; i++) {
-            if (layer[i][column - 2] == 0) {
-                if (rd.nextBoolean()) {
-                    layer[i][column - 1] = 0;
-                }
+
+        for (int i = 0; i < rows - 3 ; i++) {
+            if (layer[i][column - 2] == 0){
+                if (rd.nextBoolean()) { layer[i][column-1] = 0;}
             }
         }
 
-        boolean buttom_verification_bool = false;
-        int buttom_verification_index = 0;
-        for (int i = 0; i < column - 1; i++) {
-            if (layer[1][i] == 0 && layer[0][i] == 1) { //fixing the most up
-                if (rd.nextBoolean()) {
-                    layer[0][i] = 0;
-                }
+        for (int i = 0; i < column - 3 ; i++) {
+            if (layer[1][i] == 0 && layer[0][i] == 1){ //fixing the most up
+                if (rd.nextBoolean()) { layer[0][i] = 0;}
             }
 
-            if (layer[rows - 2][i] == 0 && layer[rows - 1][i] == 1) { //fixing the most bottom
-                buttom_verification_index = i;
-                if (rd.nextBoolean()) {
-                    layer[rows - 1][i] = 0;
-                    buttom_verification_bool = true;
-                }
+            if (layer[rows - 2][i] == 0 && layer[rows -1][i] == 1){ //fixing the most bottom
+                if (rd.nextBoolean()) { layer[rows -1][i] = 0;}
             }
         }
-        if (!buttom_verification_bool) {
-            layer[rows - 1][buttom_verification_index] = 0;
-        }
+
     }
 
 

@@ -47,6 +47,10 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return null;
     }
 
+    public int yoni(){
+        return 0;
+    }
+
 //    private Solution getSolution(AState tmp) {
 //        Solution solution = new Solution();
 //        solution.add(tmp);

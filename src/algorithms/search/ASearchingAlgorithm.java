@@ -1,5 +1,8 @@
 package algorithms.search;
 
+/**
+ * Abstract lass referring to an abstract state.
+ */
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
     protected Solution sol;
     protected int numOfNodesEvaluated = 0;

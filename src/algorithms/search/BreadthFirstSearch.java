@@ -2,6 +2,9 @@ package algorithms.search;
 
 import java.util.*;
 
+/**
+ * Classic BFS searching algorithm.
+ */
 public class BreadthFirstSearch extends ASearchingAlgorithm{
 
     int numOfNodesEvaluated;
@@ -9,20 +12,36 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
     int sumCost;
 
     @Override
+    /**
+     * @return name of the algorithm - "BreadthFirstSearch".
+     */
     public String getName() {
         return "BreadthFirstSearch";
     }
 
     @Override
+    /**
+     * @return number of nodes evaluated.
+     */
     public int getNumberOfNodesEvaluated() {
         return this.numOfNodesEvaluated;
     }
 
     @Override
-    public Solution solve(ISearchable specificPuzzle) { //Wrapper function
+    /**
+     * Wrapper function in order to distinguish which
+     * variation of the algorithm we are interested in using
+     */
+    public Solution solve(ISearchable specificPuzzle) {
             Queue<AState> queue = new LinkedList<>();
             return solve(specificPuzzle, queue);}
 
+    /**
+     * A searching algorithm, at each step horizontally checks all its optional neighbors for progress.
+     * @param specificPuzzle- the structure on which the search is performed
+     * @param queue - all possible states for progress
+     * @return  the shortest path to solve the problem
+     */
     public Solution solve(ISearchable specificPuzzle,Queue<AState> queue) {
             sumCost = 0;
             if (specificPuzzle==null) return null;
@@ -54,6 +73,9 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         return null;
         }
     @Override
+    /**
+     * return the Solution path
+     */
     public Solution getSolution(AState tmp) {
         int sum = 0;
         Solution solution = new Solution();
@@ -66,7 +88,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
             this.numOfNodesEvaluated++;
             tmp = tmp.getParent();
         }
-        System.out.println(sum);
+       // System.out.println(sum);
         return solution;
     }
 }

@@ -6,6 +6,13 @@ import java.util.Random;
 
 public class SimpleMazeGenerator extends AMazeGenerator {
     @Override
+    /**
+     * Generate a new maze.
+     * set the start and goal position as the corners of the maze
+     * @param rows - Maze's row
+     * @param column - Maze's column
+     * @return - a new maze .
+     */
      public Maze generate(int column, int rows) {
         if (rows < 2 || column < 2){throw new RuntimeException("Maze must be greater then 2X2");}
         Maze maze =  new Maze(column,rows);

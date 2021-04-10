@@ -6,7 +6,9 @@ import algorithms.search.Solution;
 
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * Maze class contains 5 fields - maze, row, column, end_position and start_position .
+ */
 public class Maze {
     int[][] maze;
     int rows;
@@ -14,24 +16,31 @@ public class Maze {
     Position end_position;
     Position start_position;
 
+    /**
+     * @return the maze's row amount.
+     */
     public int getRows() {
         return rows;
     }
 
+    /**
+     * @return the maze's column amount.
+     */
     public int getColumn() {
         return column;
     }
 
+    /**
+     * @return the maze's maze field.
+     */
     public int[][] getMaze() {
         return maze;
     }
 
     /**
-     *
-     * @return display the maze as a string based on the values ​​in it.
+     * display the maze as a string based on the values ​​in it.
      * we will run on the maze cells. Cells with a value of 1 will be defined as walls and mark with char 1, otherwise they will mark as passage with char 0
      * start position and end position would mark as S and E respectively
-     *
      */
     public String toString() {
         //
@@ -70,8 +79,9 @@ public class Maze {
 
     /**
      * constructor - build new maze from a given size
-     * @param rows -number of row in the new maze
-     * @param column- number of colmun in the new maze
+     * initializing the maze fields as full of 1's.
+     * @param rows
+     * @param column
      */
     public Maze(int rows, int column) {
         //constructor - build the maze with walls only, start and goal positions
@@ -91,20 +101,36 @@ public class Maze {
         System.out.println(this);
     }
 
+
+    /**
+     * Make a new Position instance and make it as the startPosition field.
+     * @param row - Start position row.
+     * @param column - Start position column.
+     */
     public void setStartPosition(int row, int column) {
         start_position = new Position(row, column);
     }
 
+    /**
+     * Make a new Position instance and make it as the endPosition field.
+     * @param row - Start position row.
+     * @param column - Start position column.
+     */
     public void setEndPosition(int row, int column) {
         end_position = new Position(row, column);
     }
 
+    /**
+     * @return the maze's end Position .
+     */
     public Position getEndPosition() {
         return end_position;
 
     }
 
-
+    /**
+     * @return the maze's start Position.
+     */
     public Position getStartPosition() {
         return start_position;
 

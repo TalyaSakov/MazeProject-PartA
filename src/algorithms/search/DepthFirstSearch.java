@@ -12,16 +12,26 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
 //    Stack<AState> DFS_stack;
 
     @Override
+    /**
+     * @return name of the algorithm - "DepthFirstSearch".
+     */
     public String getName() {
         return "DepthFirstSearch";
     }
 
     @Override
+    /**
+     * @return number of nodes evaluated.
+     */
     public int getNumberOfNodesEvaluated() {
         return numOfNodesEvaluated;
     }
 
     @Override
+    /**
+     * Search algorithm, with each step advanced in depth in order to find a way to the solution.
+     * Returns an optional path to the solution
+     */
     public Solution solve(ISearchable specificPuzzle) {
         AState startState = specificPuzzle.getStart();
         Stack<AState> stack = new Stack<>();
@@ -47,9 +57,7 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
         return null;
     }
 
-    public int yoni(){
-        return 0;
-    }
+
 
 //    private Solution getSolution(AState tmp) {
 //        Solution solution = new Solution();

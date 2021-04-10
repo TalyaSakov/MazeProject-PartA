@@ -10,10 +10,18 @@ import java.util.List;
 public class SearchableMaze implements ISearchable {
     private Maze maze;
 
+    /**
+     * constructor- initialized maze field
+     * @param maze
+     */
     public SearchableMaze(Maze maze){
         this.maze = maze;
     }
 
+    @Override
+    /**
+     * @return the maze start position
+     */
     public AState getStart(){
         if (this.maze==null) return null;
         Position startPosition = maze.getStartPosition();
@@ -21,13 +29,21 @@ public class SearchableMaze implements ISearchable {
     }
 
     @Override
+    /**
+     * @return the maze enf position
+     */
     public AState getEnd() {
         if (this.maze.getEndPosition()==null) return null;
         Position endPosition = maze.getEndPosition();
         return (new MazeState(endPosition.getRowIndex(),endPosition.getColumnIndex()));
     }
 
-
+    /**
+     * For each AState checks what are the optional steps for progress and according to the
+     * searching algorithm we are using- what is the cost of each step
+     * @param curr_state - current position
+     * @return list of all current optional steps
+     */
     public List<AState> getAllSuccessors(AState curr_state){
         if (!(curr_state instanceof MazeState)){
             return null;

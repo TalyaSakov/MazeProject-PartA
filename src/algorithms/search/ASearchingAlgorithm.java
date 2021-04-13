@@ -26,20 +26,4 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm{
      */
     public int getNumOfNodesEvaluated(){return numOfNodesEvaluated;}
 
-    /**
-     * @param tmp
-     * @return a solution based on a given state
-     */
-   public Solution getSolution(AState tmp) {
-        Solution solution = new Solution();
-        solution.add(tmp);
-        this.numOfNodesEvaluated++;
-        while (tmp.getParent() != null){
-            solution.add(tmp.getParent());
-            this.numOfNodesEvaluated++;
-            tmp = tmp.getParent();
-        }
-        return solution;
-    }
-
 }

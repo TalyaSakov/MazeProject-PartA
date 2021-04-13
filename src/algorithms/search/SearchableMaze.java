@@ -4,7 +4,6 @@ import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class SearchableMaze implements ISearchable {
@@ -33,8 +32,8 @@ public class SearchableMaze implements ISearchable {
      * @return the maze enf position
      */
     public AState getEnd() {
-        if (this.maze.getEndPosition()==null) return null;
-        Position endPosition = maze.getEndPosition();
+        if (this.maze.getGoalPosition()==null) return null;
+        Position endPosition = maze.getGoalPosition();
         return (new MazeState(endPosition.getRowIndex(),endPosition.getColumnIndex()));
     }
 

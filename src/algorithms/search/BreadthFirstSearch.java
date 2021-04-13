@@ -44,23 +44,22 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
      */
     public Solution solve(ISearchable specificPuzzle,Queue<AState> queue) {
             sumCost = 0;
-            if (specificPuzzle==null) return null;
+            if (specificPuzzle==null) throw new RuntimeException("The specific puzzle recited is null");
             AState startState = specificPuzzle.getStart();
             HashSet<AState> visited = new HashSet<>();
             queue.add(startState);
-            while(!queue.isEmpty()){
+            while(!queue.isEmpty()){ //While the queue isn't empty
                 if ((queue.peek().equals(specificPuzzle.getEnd()))){break;}
                 AState tmp = queue.poll();
                 if(!visited.contains(tmp)){
-                    visited.add(tmp);
+                    visited.add(tmp); //add the current state to visited.
                     sumCost += tmp.getCost();
-//                    System.out.println(tmp);
-                    List<AState> possibleStates = specificPuzzle.getAllSuccessors(tmp);
+                    List<AState> possibleStates = specificPuzzle.getAllSuccessors(tmp); //Get all possible moves from the current state.
                     if (possibleStates.size() == 0){
                         sumCost -= tmp.getAccumulatedCost();
                         tmp.setParentNull();
                         continue;}
-                    for(AState adjacent: possibleStates){
+                    for(AState adjacent: possibleStates){ //adding all possible moves to queue
                         adjacent.setParent(tmp);
                         adjacent.setAccumulatedCost(sumCost + adjacent.getCost());
                         queue.add(adjacent);}
@@ -69,12 +68,10 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
         if (queue.peek() != null && queue.peek().equals(specificPuzzle.getEnd())){
                 return getSolution(queue.poll());
             }
-        System.out.println("ERROR!!!");
         return null;
         }
-    @Override
     /**
-     * return the Solution path
+     * return the Solution path - For the BestFS AND BFS
      */
     public Solution getSolution(AState tmp) {
         int sum = 0;
@@ -88,7 +85,6 @@ public class BreadthFirstSearch extends ASearchingAlgorithm{
             this.numOfNodesEvaluated++;
             tmp = tmp.getParent();
         }
-       // System.out.println(sum);
         return solution;
     }
 }

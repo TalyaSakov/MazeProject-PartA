@@ -1,11 +1,4 @@
 package algorithms.mazeGenerators;
-
-import algorithms.search.AState;
-import algorithms.search.MazeState;
-import algorithms.search.Solution;
-
-import java.util.Arrays;
-import java.util.List;
 /**
  * Maze class contains 5 fields - maze, row, column, end_position and start_position .
  */
@@ -52,27 +45,26 @@ public class Maze {
 
         for (int x = 0; x < rows; x++) {
             b.append("{ ");
-                for (int y = 0; y < column; y++) {
+            for (int y = 0; y < column; y++) {
 
-                    if (x == start_position.row && y == start_position.column){
-                        b.append(START_CHAR);
-                        b.append(' ');}
-                    //checking if it's a goal position
-                    else if (x == end_position.row && y == end_position.column){
-                        b.append(END_CHAR);
-                        b.append(' ');}
-                    //checking if it's a wall or passage
-                    else{
-                        b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
-                        b.append(' ');}
+                if (x == start_position.row && y == start_position.column) {
+                    b.append(START_CHAR);
+                    b.append(' ');
                 }
-//            b.append( WALL_CHAR );
-                b.append("}");
-                b.append('\n');
+                //checking if it's a goal position
+                else if (x == end_position.row && y == end_position.column) {
+                    b.append(END_CHAR);
+                    b.append(' ');
+                }
+                //checking if it's a wall or passage
+                else {
+                    b.append(maze[x][y] == 1 ? WALL_CHAR : PASSAGE_CHAR);
+                    b.append(' ');
+                }
             }
-//        for ( int x = 0; x < column + 2; x++ )
-//            b.append( WALL_CHAR );
-
+            b.append("}");
+            b.append('\n');
+        }
             b.append('\n');
             return b.toString();
         }
@@ -123,7 +115,7 @@ public class Maze {
     /**
      * @return the maze's end Position .
      */
-    public Position getEndPosition() {
+    public Position getGoalPosition() {
         return end_position;
 
     }

@@ -64,14 +64,12 @@ public class MyMaze3DGenerator extends AMaze3DGenerator {
                 if (y >= 2 && layer[x][y - 2] == 1)
                     primFronts.add(new int[]{x, y - 1, x, y - 2});
                 if (x < rows - 2 && layer[x + 2][y] == 1)
-
                     primFronts.add(new int[]{x + 1, y, x + 2, y});
                 if (y < column - 2 && layer[x][y + 2] == 1)
                     primFronts.add(new int[]{x, y + 1, x, y + 2});
             }
         }
         arrangeBorders(rows,column,layer); //Arrange borders for each layer.
-
     }
 
 

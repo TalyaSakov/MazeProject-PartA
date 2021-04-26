@@ -12,6 +12,9 @@ System.out.println(String.format("Maze generation time(ms): %s", mazeGenerator.m
 // generate another maze
         Maze maze = mazeGenerator.generate(100/*rows*/, 100/*columns*/);
 // prints the maze
+        byte[] bytes = maze.toByteArray();
+        Maze maze2 = new Maze(bytes);
+
         maze.print();
 // get the maze entrance
         Position startPosition = maze.getStartPosition();

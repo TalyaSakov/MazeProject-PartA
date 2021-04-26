@@ -1,4 +1,7 @@
 package algorithms.mazeGenerators;
+
+import java.util.ArrayList;
+
 /**
  * Maze class contains 5 fields - maze, row, column, end_position and start_position .
  */
@@ -94,7 +97,6 @@ public class Maze {
         System.out.println(this);
     }
 
-
     /**
      * Make a new Position instance and make it as the startPosition field.
      * @param row - Start position row.
@@ -121,6 +123,76 @@ public class Maze {
 
     }
 
+
+    public Maze(byte[] bytes) {
+        int [] fieldsValue= new int[5];
+        String temp="";
+        int currField=0;
+        for (int i=0; i<bytes.length; i++){
+            if (currField==6){
+                break;
+            }
+            else {
+                while (bytes[i] != -1) {
+                    temp += (char) bytes[i];
+                }
+                i++; // "jump over" -1 value and continue to the next field
+                fieldsValue[currField] = Integer.parseInt(temp, 2); //convert binary string to a decimal int value
+                currField++; //continue to the next field
+                temp = ""; //init temp
+            }
+        }
+        this.rows=fieldsValue[0];
+        this.column=fieldsValue[1];
+        setStartPosition(fieldsValue[2],fieldsValue[3]);
+        setEndPosition(fieldsValue[4],fieldsValue[5]);
+
+    }
+
+    public byte[] toByteArray(){
+        ArrayList<String> stringList = new ArrayList<>();
+        int sumOfExtracted = extracted(stringList);
+        int index = 0;
+        byte[] bytes = new byte[rows*column + sumOfExtracted];
+
+        for (String s : stringList) {
+            index += addMazeVariables(s, index, bytes);
+        }
+        matrixToByte(index, bytes);
+        return bytes;
+    }
+
+    private void matrixToByte(int index, byte[] bytes) {
+        for (int i = 0; i < rows - 1; i++) {
+            for (int j = 0; j < column - 1; j++) {
+                bytes[index] = (byte) maze[i][j];
+                index++;
+            }
+            bytes[index] = -1;
+            index++;
+        }
+    }
+
+    private int extracted(ArrayList<String> stringList) {
+        stringList.add(Integer.toBinaryString(rows));
+        stringList.add(Integer.toBinaryString(column));
+        stringList.add(Integer.toBinaryString(start_position.getRowIndex()));
+        stringList.add(Integer.toBinaryString(start_position.getColumnIndex()));
+        stringList.add(Integer.toBinaryString(end_position.getRowIndex()));
+        stringList.add(Integer.toBinaryString(end_position.getColumnIndex()));
+        return stringList.size();
+    }
+
+    private int addMazeVariables(String stringInBinary, int index, byte[] bytes) {
+        for (int i = 0; i < stringInBinary.length(); i++) {
+            bytes[i]= (byte) Character.getNumericValue(stringInBinary.charAt(i));
+            index++;
+        }
+        bytes[index+1] = -1;
+        index ++;
+        return index;
+    }
+
     /**
      * @return the maze's start Position.
      */
@@ -129,5 +201,4 @@ public class Maze {
 
     }
 }
-
 

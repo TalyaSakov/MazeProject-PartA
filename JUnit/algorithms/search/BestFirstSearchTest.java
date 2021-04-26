@@ -16,7 +16,7 @@ class BestFirstSearchTest {
     @Test
     void getName() {
         BestFirstSearch BestFS= new BestFirstSearch();
-        assertEquals("Best First Search",BestFS.getName());
+        assertEquals("BestFirstSearch",BestFS.getName());
     }
 
     @Test
@@ -33,9 +33,6 @@ class BestFirstSearchTest {
             testTooSmallMaze(mg,1,1,"Maze must be greater then 2X2");
             testTooSmallMaze(emg,-30,-20,"Maze must be greater then 2X2");
 
-         //   Solution solution2=BestFS.solve(searchableMaze2);
-          //  assertEquals(null,solution2);
-         //   assertNotEquals(0,solution2);
 
 
         }

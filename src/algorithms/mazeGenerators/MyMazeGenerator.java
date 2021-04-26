@@ -54,7 +54,7 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
         arrangeBorders(rows,column,maze);
-        if (makeStartAndEnd) {initializeStartAndGoal(rows,column,maze);}
+        initializeStartAndGoal(rows,column,maze);
         return maze;
     }
 

@@ -79,6 +79,7 @@ public class Maze {
         //constructor - build the maze with walls only, start and goal positions
         this.rows = rows;
         this.column = column;
+        this.start_position = new Position(rows-1,column -1);
         this.end_position = new Position(0, 0);
         maze = new int[rows][column];
         int i, j;

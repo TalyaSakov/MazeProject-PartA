@@ -7,8 +7,12 @@ public class Test {
 
     public static void main(String[] args){
         MyMazeGenerator test = new MyMazeGenerator();
-        Maze temp = test.generate(50,50);
-        System.out.println(temp);
+        Maze maze=test.generate(5,5);
+        byte[] bytes= maze.toByteArray();
+        System.out.println(bytes);
+
+
+
 
     }
 }

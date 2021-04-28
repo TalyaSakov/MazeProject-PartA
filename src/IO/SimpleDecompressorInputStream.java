@@ -1,35 +1,46 @@
 package IO;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
 
-public class SimpleDecompressorInputStream extends OutputStream {
-    OutputStream outputStream;
+public class SimpleDecompressorInputStream extends InputStream {
+    InputStream inputStream;
 
-    @Override
-    public void write(int b) throws IOException {
 
+    public SimpleDecompressorInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
     }
 
-    public void write(byte[] compressedBytes) throws IOException {
+    public int read(byte[] compressedBytes) throws IOException {
+        inputStream.read(compressedBytes);
+
         LinkedList<Byte> tempLinkedList = new LinkedList<>();
-        int runningIndex = 0; //the running index on the unCompressedBytes array
         byte binaryVariable = 0; //Indicates zero or ones.
 
-        for (int i = 0; i < compressedBytes.length; i++) {
-            byte tempByte = compressedBytes[i];
+        for (byte tempByte : compressedBytes) {
             for (int j = 0; j < tempByte; j++) {
                 tempLinkedList.add(binaryVariable);
             }
-            if (binaryVariable == 0){binaryVariable = 1;}
-            else{binaryVariable = 0;}
+            if (binaryVariable == 0) {
+                binaryVariable = 1;
+            } else {
+                binaryVariable = 0;
+            }
 
         }
-        byte[] unCompressedBytes = new byte[tempLinkedList.size()];
-        for (int i = 0; i < tempLinkedList.size(); i++) {
-            compressedBytes[i] = tempLinkedList.pollFirst();
+//        byte[] unCompressedBytes = new byte[tempLinkedList.size()];
+
+        int iterationsAmount = tempLinkedList.size();
+        for (int i = 0; i < iterationsAmount; i++) {
+            compressedBytes[i] = tempLinkedList.pollFirst(); //Makeing compressedBytes to UncompressedBytes
         }
+       return 0;
     }
 
+    @Override
+    public int read() throws IOException {
+        return 0;
+    }
 }

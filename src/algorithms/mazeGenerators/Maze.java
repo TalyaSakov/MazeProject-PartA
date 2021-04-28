@@ -68,9 +68,9 @@ public class Maze {
             b.append("}");
             b.append('\n');
         }
-        b.append('\n');
-        return b.toString();
-    }
+            b.append('\n');
+            return b.toString();
+        }
 
     /**
      * constructor - build new maze from a given size
@@ -125,19 +125,21 @@ public class Maze {
 
 
     public Maze(byte[] bytes) {
-        int [] fieldsValue= new int[5];
+        int [] fieldsValue= new int[6];
         String temp="";
         int currField=0;
+        int index=0;
         int i;
         for (i=0; i<bytes.length; i++){
             if (currField==6){
                 break;
             }
             else {
-                while (bytes[i] != -1) {
-                    temp += (char) bytes[i];
+                for(int j=0;j<10;j++){
+                    temp +=bytes[index];
+                    index++;
                 }
-                i++; // "jump over" -1 value and continue to the next field
+
                 fieldsValue[currField] = Integer.parseInt(temp, 2); //convert binary string to a decimal int value
                 currField++; //continue to the next field
                 temp = ""; //init temp
@@ -148,23 +150,24 @@ public class Maze {
         setStartPosition(fieldsValue[2],fieldsValue[3]);
         setEndPosition(fieldsValue[4],fieldsValue[5]);
 
-        for (int k=0; i<rows; i++){
-            for(int j=0; j<column; j++){
-                this.maze[k][j]=bytes[i];
-                i++;
-            }
-        }
+        this.maze = new int[rows][column];
+        byteToMatrix(index,bytes);
+
 
     }
 
+
     public byte[] toByteArray(){
         ArrayList<String> stringList = new ArrayList<>();
-        extractBinary(stringList);
-        int index = 0;
-        byte[] bytes = new byte[rows*column + 6 * 10]; //10 bits per variable
+       extracted(stringList);
+        byte[] bytes = new byte[rows*column + 60];
+        int index=0;
 
-        for (String s : stringList) {
-            index = addMazeVariables(s, index, bytes);
+        for (String s : stringList) { //running over all 6 field
+            for (int i=0;i<10;i++){ //running over each 10 bit field
+                bytes[index]= (byte) Character.getNumericValue(s.charAt(i));
+                index++;
+            }
         }
         matrixToByte(index, bytes);
         return bytes;
@@ -176,27 +179,42 @@ public class Maze {
                 bytes[index] = (byte) maze[i][j];
                 index++;
             }
-            // bytes[index] = -1;
-            //index++;
         }
     }
 
-    private void extractBinary(ArrayList<String> stringLis
-        stringList.add(to10bit(rows))stringList.add(to10bit(rows));;
+    private void byteToMatrix(int index, byte[] bytes) {
+        for (int k = 0; k < rows - 1; k++) {
+            for (int j = 0; j < column - 1; j++) {
+                int tempByte =  bytes[index];
+                this.maze[k][j]=tempByte;
+                index++;
+            }
+        }
+    }
+
+    private void extracted(ArrayList<String> stringList) {
+        stringList.add(to10bit(rows));
+        stringList.add(to10bit(column));
+        stringList.add(to10bit(start_position.getRowIndex()));
+        stringList.add(to10bit(start_position.getColumnIndex()));
+        stringList.add(to10bit(end_position.getRowIndex()));
+        stringList.add(to10bit(end_position.getColumnIndex()));
     }
 
     /*
     get a intger value of field, convert it to binary base
     and add zero until we get to lenght of 10 chars
-
      */
     private String to10bit(int val){
         String str=Integer.toBinaryString(val);
+        String temp="";
         int num= 10-str.length();
         for (int i=0;i<num;i++){
-            str+=0;
+            temp+="0";
         }
-        return str;
+        temp+=str;
+
+        return temp;
     }
 
     private int addMazeVariables(String stringInBinary, int index, byte[] bytes) {

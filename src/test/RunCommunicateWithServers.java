@@ -40,12 +40,14 @@ public class RunCommunicateWithServers {
 
     private static void CommunicateWithServer_MazeGenerating() {
         try {
+            System.out.println("Making new client");
             Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
                 @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                     try {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
+                        System.out.println("Apply S Client");
                         toServer.flush();
                         int[] mazeDimensions = new int[]{50, 50};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
@@ -62,7 +64,7 @@ public class RunCommunicateWithServers {
                 }
             });
             client.communicateWithServer();
-        } catch (UnknownHostException e) {
+        } catch (UnknownHostException e ) {
             e.printStackTrace();
         }
     }

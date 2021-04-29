@@ -45,7 +45,8 @@ public class Server {
                 System.out.println("startClientSocket is started by new thread");
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client accepted: " + clientSocket.toString());
-                threadPoolExecutor.execute(() -> handleClient(clientSocket));
+//                threadPoolExecutor.execute(() -> handleClient(clientSocket));
+                handleClient(clientSocket);
 //      LOG.info("Client accepted: " + clientSocket.toString());
 
             } catch (IOException e) {

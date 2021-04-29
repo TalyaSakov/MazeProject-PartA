@@ -11,27 +11,27 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
 
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
-        try {
-            ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
-            ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
+        try{
+            ObjectInputStream FromClient=new ObjectInputStream(inFromClient );
+            ObjectOutputStream toClient=new ObjectOutputStream (outToClient);
+            System.out.println("Apply strategy Server begin");
 
-            int[] mazeParam = (int [])fromClient.readObject();
-            Maze maze= new MyMazeGenerator().generate(mazeParam[0],mazeParam[1]);
-            byte [] toByte = maze.toByteArray();
+            int[] mazeSize=(int[])FromClient.readObject();
 
-            ByteArrayOutputStream arr=new ByteArrayOutputStream(); //create an input to the stream
-            SimpleCompressorOutputStream arrayToCompress= new SimpleCompressorOutputStream(arr); //sent the arr to the compressor
+            Maze my_maze= new MyMazeGenerator().generate(mazeSize[0],mazeSize[1]);
+            toClient.flush();
+            ByteArrayOutputStream out=new ByteArrayOutputStream();//a byte array in the memory we will write the array to
+            SimpleCompressorOutputStream output=new SimpleCompressorOutputStream(out);
+            output.write(my_maze.toByteArray());  //write to the stream the byte maze and then it would compress it
+            toClient.writeObject(out.toByteArray());
+            toClient.flush();
 
-            arrayToCompress.flush();
-            arrayToCompress.write(toByte); //array to write in
-            arrayToCompress.flush();
-            arrayToCompress.close();
-            toClient.writeObject(arr.toByteArray());
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-}
+
+    }}
+
+

@@ -12,6 +12,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
 
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
+
         try{
             ObjectInputStream FromClient=new ObjectInputStream(inFromClient );
             ObjectOutputStream toClient=new ObjectOutputStream (outToClient);
@@ -32,6 +33,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
 
 
         } catch (IOException | ClassNotFoundException e) {
+
             e.printStackTrace();
         }
 

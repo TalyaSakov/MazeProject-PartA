@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 
 public class RunCommunicateWithServers {
+    //TODO: 1. check the test file we got- the value in line 65 should be 1000 and this is not working
+    //TODO: 2. the program does not stop to running- the server is stay at waiting position. is it ok?
     public static void main(String[] args) {
 
         //Initializing servers

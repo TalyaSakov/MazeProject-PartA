@@ -12,11 +12,13 @@ import algorithms.search.Solution;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 
 public class RunCommunicateWithServers {
     public static void main(String[] args) {
+
         //Initializing servers
         Server mazeGeneratingServer = new Server(5402, 1000, new ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());

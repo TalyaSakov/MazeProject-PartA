@@ -31,6 +31,7 @@ public class Server {
     }
     public void startServer() {
         try {
+            while(!stop){
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
 //            LOG.info("Starting server at port = " + port);
@@ -40,12 +41,11 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client accepted: " + clientSocket.toString());
                 threadPoolExecutor.execute(() -> handleClient(clientSocket));
-//                handleClient(clientSocket);
 //      LOG.info("Client accepted: " + clientSocket.toString());
             } catch (IOException e) {
                 System.out.println("Socket is waiting");;
             }
-        } catch (SocketException e) {
+        }} catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

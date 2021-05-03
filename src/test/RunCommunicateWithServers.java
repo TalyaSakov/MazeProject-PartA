@@ -20,7 +20,9 @@ public class RunCommunicateWithServers {
     public static void main(String[] args) {
 
         //Initializing servers
+
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+
         Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
         //Server stringReverserServer = new Server(5402, 1000, new ServerStrategyStringReverser());
 
@@ -35,15 +37,17 @@ public class RunCommunicateWithServers {
         //CommunicateWithServer_StringReverser();
 
         //Stopping all servers
-//        mazeGeneratingServer.stop();
-//        solveSearchProblemServer.stop();
+        mazeGeneratingServer.stop();
+        solveSearchProblemServer.stop();
         //stringReverserServer.stop();
     }
 
     private static void CommunicateWithServer_MazeGenerating() {
         try {
             System.out.println("Making new client");
+
             Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
+
                 @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                     try {

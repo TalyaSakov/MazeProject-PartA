@@ -1,25 +1,19 @@
 package Server;
 
 
-import IO.SimpleCompressorOutputStream;
 import algorithms.mazeGenerators.Maze;
-import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.BreadthFirstSearch;
-import algorithms.search.ISearchable;
 import algorithms.search.SearchableMaze;
 import algorithms.search.Solution;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy{
-
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
         try{
             ObjectInputStream FromClient=new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient=new ObjectOutputStream (outToClient);
-
+            //TODO : Check if the hashcode is working okay.
             SearchableMaze maze = new SearchableMaze((Maze)FromClient.readObject());
 //            int mazeIdentity = maze.toString().hashCode();
             String mazeIdentity = "419207084.solution";
@@ -32,6 +26,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
             if (!exist){
                 ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '\\' + mazeIdentity+".solution"));
+
                 System.out.println("Solution doesn't exists");
                 BreadthFirstSearch bfs = new BreadthFirstSearch();
                 Solution mazeSolution = bfs.solve(maze);
@@ -43,20 +38,24 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
             }
             else{
+
 //                File newFile = new File(tempDirectoryPath + '/' + mazeIdentity);
                 ObjectInputStream inFromDirectory = new ObjectInputStream(new FileInputStream(tempDirectoryPath +mazeIdentity));
+
                 System.out.println(tempDirectoryPath + mazeIdentity);
                 System.out.println("Solution already exists");
                 Solution mazeSolution = (Solution) inFromDirectory.readObject();
                 toClient.writeObject(mazeSolution);
                 toClient.flush();
+                inFromDirectory.close();
             }
+
 
 //            inFromDirectory.close();
 
+
             FromClient.close();
             toClient.close();
-
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

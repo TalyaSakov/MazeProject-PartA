@@ -31,20 +31,24 @@ public class Server {
     }
     public void startServer() {
         try {
+
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
 //            LOG.info("Starting server at port = " + port);
             System.out.println("Starting server at port = " + port);
+
+            while(!stop){
             try {
                 System.out.println("startClientSocket is started by new thread");
                 Socket clientSocket = serverSocket.accept();//waiting for a clinet
                 System.out.println("Client accepted: " + clientSocket.toString());
                 threadPoolExecutor.execute(() -> handleClient(clientSocket));
-//                handleClient(clientSocket);
 //      LOG.info("Client accepted: " + clientSocket.toString());
             } catch (IOException e) {
                 System.out.println("Socket is waiting");;
             }
+        }
+            serverSocket.close();
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,6 +58,7 @@ public class Server {
 
     private void handleClient(Socket clientSocket) {
         try {
+            System.out.println(String.format("Client accepted- client with socket: %s", clientSocket.toString()));
             strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
 //            LOG.info("Done handling client: " + clientSocket.toString());
             System.out.println("Done handling client: " + clientSocket.toString());

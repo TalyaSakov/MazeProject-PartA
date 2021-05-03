@@ -21,8 +21,6 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
             int[] mazeSize=(int[])FromClient.readObject();
 
             Maze my_maze= new MyMazeGenerator().generate(mazeSize[0],mazeSize[1]);
-
-
             toClient.flush();
             ByteArrayOutputStream out=new ByteArrayOutputStream();//a byte array in the memory we will write the array to
             MyCompressorOutputStream output=new MyCompressorOutputStream(out); //creat a new object output that would get out as an input and will writ to it
@@ -38,5 +36,4 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
         }
 
     }}
-
 

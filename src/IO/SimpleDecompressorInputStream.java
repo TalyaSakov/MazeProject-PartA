@@ -10,16 +10,17 @@ public class SimpleDecompressorInputStream extends InputStream {
 
 
     public SimpleDecompressorInputStream(InputStream inputStream) {
-        this.inputStream = inputStream;
+        this.inputStream = inputStream; //Bytearrayinputstream(compressed)
     }
 
-    public int read(byte[] compressedBytes) throws IOException {
-        inputStream.read(compressedBytes);
+    public int read(byte[] decompressedBytes) throws IOException {
+
+        inputStream.read(decompressedBytes);
 
         LinkedList<Byte> tempLinkedList = new LinkedList<>();
         byte binaryVariable = 0; //Indicates zero or ones.
 
-        for (byte tempByte : compressedBytes) {
+        for (byte tempByte : decompressedBytes) {
             for (int j = 0; j < tempByte; j++) {
                 tempLinkedList.add(binaryVariable);
             }
@@ -28,14 +29,14 @@ public class SimpleDecompressorInputStream extends InputStream {
             } else {
                 binaryVariable = 0;
             }
-
         }
-//        byte[] unCompressedBytes = new byte[tempLinkedList.size()];
 
+//        compressedBytes = new byte[tempLinkedList.size()];
         int iterationsAmount = tempLinkedList.size();
         for (int i = 0; i < iterationsAmount; i++) {
-            compressedBytes[i] = tempLinkedList.pollFirst(); //Makeing compressedBytes to UncompressedBytes
+            decompressedBytes[i] = tempLinkedList.pollFirst(); //Making compressedBytes to UncompressedBytes
         }
+
        return 0;
     }
 

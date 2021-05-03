@@ -43,7 +43,7 @@ public class Server {
 
             try {
                 System.out.println("startClientSocket is started by new thread");
-                Socket clientSocket = serverSocket.accept();
+                Socket clientSocket = serverSocket.accept();//waiting for a clinet
                 System.out.println("Client accepted: " + clientSocket.toString());
 //                threadPoolExecutor.execute(() -> handleClient(clientSocket));
                 handleClient(clientSocket);

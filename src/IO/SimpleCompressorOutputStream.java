@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class SimpleCompressorOutputStream extends OutputStream {
-    OutputStream outputStream;
+    public OutputStream outputStream;
 
     public SimpleCompressorOutputStream(OutputStream outputStream) {
         this.outputStream = outputStream;

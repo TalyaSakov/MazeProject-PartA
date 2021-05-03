@@ -25,34 +25,26 @@ public class Server {
         this.threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
     }
-
-
-
     public void start() {
         threadPoolExecutor.setCorePoolSize(Runtime.getRuntime().availableProcessors());
         new Thread(this::startServer).start();
     }
-
-
     public void startServer() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
 //            LOG.info("Starting server at port = " + port);
             System.out.println("Starting server at port = " + port);
-
             try {
                 System.out.println("startClientSocket is started by new thread");
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client accepted: " + clientSocket.toString());
-//                threadPoolExecutor.execute(() -> handleClient(clientSocket));
-                handleClient(clientSocket);
+                threadPoolExecutor.execute(() -> handleClient(clientSocket));
+//                handleClient(clientSocket);
 //      LOG.info("Client accepted: " + clientSocket.toString());
-
             } catch (IOException e) {
                 System.out.println("Socket is waiting");;
             }
-
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -60,12 +52,10 @@ public class Server {
         }
     }
 
-
     private void handleClient(Socket clientSocket) {
         try {
             strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
 //            LOG.info("Done handling client: " + clientSocket.toString());
-
             System.out.println("Done handling client: " + clientSocket.toString());
             clientSocket.close();
         } catch (IOException e){

@@ -1,11 +1,12 @@
 package algorithms.mazeGenerators;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Maze class contains 5 fields - maze, row, column, end_position and start_position .
  */
-public class Maze {
+public class Maze implements Serializable {
     int[][] maze;
     int rows;
     int column;

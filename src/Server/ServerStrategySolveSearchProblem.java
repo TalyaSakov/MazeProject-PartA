@@ -22,15 +22,16 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
 
             SearchableMaze maze = new SearchableMaze((Maze)FromClient.readObject());
 //            int mazeIdentity = maze.toString().hashCode();
-            int mazeIdentity = 1631196173;
+            String mazeIdentity = "419207084.solution";
 //            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
-            String tempDirectoryPath = "/Users/jonthan.p/Desktop/Test-ATP/";
-            boolean exist = new File(tempDirectoryPath + '/' + mazeIdentity).exists();
+            String tempDirectoryPath = "C:\\Users\\Talya\\Desktop\\talya\\";
+            boolean exist = new File(tempDirectoryPath + '\\' + mazeIdentity).exists();
 //            File mazeFile = new File(tempDirectoryPath + '/' + mazeIdentity);
 
-            ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '/' + mazeIdentity));
+           ;
 
             if (!exist){
+                ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '\\' + mazeIdentity+".solution"));
                 System.out.println("Solution doesn't exists");
                 BreadthFirstSearch bfs = new BreadthFirstSearch();
                 Solution mazeSolution = bfs.solve(maze);
@@ -38,11 +39,13 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
                 outToDirectory.writeObject(mazeSolution);
                 toClient.flush();
                 outToDirectory.flush();
+                outToDirectory.close();
 
             }
             else{
-                File newFile = new File(tempDirectoryPath + '/' + mazeIdentity);
-                ObjectInputStream inFromDirectory = new ObjectInputStream(new FileInputStream(newFile));
+//                File newFile = new File(tempDirectoryPath + '/' + mazeIdentity);
+                ObjectInputStream inFromDirectory = new ObjectInputStream(new FileInputStream(tempDirectoryPath +mazeIdentity));
+                System.out.println(tempDirectoryPath + mazeIdentity);
                 System.out.println("Solution already exists");
                 Solution mazeSolution = (Solution) inFromDirectory.readObject();
                 toClient.writeObject(mazeSolution);
@@ -50,7 +53,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             }
 
 //            inFromDirectory.close();
-            outToDirectory.close();
+
             FromClient.close();
             toClient.close();
 

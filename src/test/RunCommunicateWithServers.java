@@ -19,6 +19,10 @@ import java.util.ArrayList;
 public class RunCommunicateWithServers {
     //TODO: 1. check the test file we got- the value in line 65 should be 1000 and this is not working
     //TODO: 2. the program does not stop to running- the server is stay at waiting position. is it ok?
+
+
+
+
     public static void main(String[] args) {
 
         //Initializing servers
@@ -35,13 +39,31 @@ public class RunCommunicateWithServers {
 
         //Communicating with servers
         CommunicateWithServer_MazeGenerating();
-        CommunicateWithServer_SolveSearchProblem();
+       // CommunicateWithServer_SolveSearchProblem();
         //CommunicateWithServer_StringReverser();
+
+
+        Thread[] threadsArr= new Thread[2];
+        for (int i=0;i<threadsArr.length;i++){
+            threadsArr[i]=new Thread(()->CommunicateWithServer_SolveSearchProblem());
+            threadsArr[i].start();
+        }
+        for (int j=0;j<threadsArr.length;j++){
+            try{
+                threadsArr[j].join();
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }
 
         //Stopping all servers
         mazeGeneratingServer.stop();
         solveSearchProblemServer.stop();
         //stringReverserServer.stop();
+
+
+
+
     }
 
     private static void CommunicateWithServer_MazeGenerating() {
@@ -56,17 +78,18 @@ public class RunCommunicateWithServers {
                         ObjectOutputStream toServer = new ObjectOutputStream(outToServer);
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
-                        int[] mazeDimensions = new int[]{50, 50};
+                        int[] mazeDimensions = new int[]{10, 10};
                         toServer.writeObject(mazeDimensions); //send maze dimensions to server
                         toServer.flush();
                         System.out.println("Maze sent to server");
                         byte[] compressedMaze = (byte[]) fromServer.readObject(); //read generated maze (compressed with MyCompressor) from server
                         System.out.println("Maze received from server");
                         InputStream is = new SimpleDecompressorInputStream(new ByteArrayInputStream(compressedMaze));
-                        byte[] decompressedMaze = new byte[2600 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
+                        byte[] decompressedMaze = new byte[mazeDimensions[0]*mazeDimensions[1]+1000 /*CHANGE SIZE ACCORDING TO YOU MAZE SIZE*/]; //allocating byte[] for the decompressed maze -
                         is.read(decompressedMaze); //Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
-                        maze.print();
+                        PrintMaze(maze);
+                        //maze.print();//TODO: add synhronized function to return maze.print
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -88,8 +111,9 @@ public class RunCommunicateWithServers {
                         ObjectInputStream fromServer = new ObjectInputStream(inFromServer);
                         toServer.flush();
                         MyMazeGenerator mg = new MyMazeGenerator();
-                        Maze maze = mg.generate(50, 50);
-                        maze.print();
+                        Maze maze = mg.generate(10, 10);
+                        PrintMaze(maze);
+                        //maze.print();
                         toServer.writeObject(maze); //send maze to server
                         toServer.flush();
                         Solution mazeSolution = (Solution) fromServer.readObject();
@@ -138,5 +162,11 @@ public class RunCommunicateWithServers {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+    }
+    public static synchronized void PrintMaze(Maze maze){
+        System.out.println(Thread.currentThread().getId());
+        System.out.println(maze.toByteArray().length);
+        maze.toString();
+        maze.print();
     }
 }

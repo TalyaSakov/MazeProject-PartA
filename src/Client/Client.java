@@ -20,7 +20,7 @@ public class Client {
             Socket serverSocket = new Socket(serverIP, serverPort);
             System.out.println("connected to server - IP = " + serverIP + ", Port = " + serverPort);
             strategy.clientStrategy(serverSocket.getInputStream(), serverSocket.getOutputStream());
-            serverSocket.close();
+          //  serverSocket.close();
         }
         catch (IOException e) {
             e.printStackTrace();

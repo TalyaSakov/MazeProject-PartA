@@ -43,12 +43,17 @@ public class Server {
                 Socket clientSocket = serverSocket.accept();//waiting for a clinet
                 System.out.println("Client accepted: " + clientSocket.toString());
                 threadPoolExecutor.execute(() -> handleClient(clientSocket));
+                Thread.sleep(1000);
 //      LOG.info("Client accepted: " + clientSocket.toString());
             } catch (IOException e) {
                 System.out.println("Socket is waiting");;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }
+            }
+            threadPoolExecutor.shutdown();
             serverSocket.close();
+
         } catch (SocketException e) {
             e.printStackTrace();
         } catch (IOException e) {

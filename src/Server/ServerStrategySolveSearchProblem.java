@@ -15,10 +15,10 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             ObjectOutputStream toClient=new ObjectOutputStream (outToClient);
             //TODO : Check if the hashcode is working okay.
             SearchableMaze maze = new SearchableMaze((Maze)FromClient.readObject());
-//            int mazeIdentity = maze.toString().hashCode();
-            String mazeIdentity = "419207084.solution";
-//            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
-            String tempDirectoryPath = "C:\\Users\\Talya\\Desktop\\talya\\";
+            int mazeIdentity = maze.toString().hashCode();
+   //         String mazeIdentity = "450237404.solution";
+            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+ //           String tempDirectoryPath = "C:\\Users\\Talya\\Desktop\\talya\\";
             boolean exist = new File(tempDirectoryPath + '\\' + mazeIdentity).exists();
 //            File mazeFile = new File(tempDirectoryPath + '/' + mazeIdentity);
 

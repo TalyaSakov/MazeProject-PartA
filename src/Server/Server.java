@@ -15,6 +15,7 @@ public class Server {
     private IServerStrategy strategy;
     private volatile boolean stop;
     private ThreadPoolExecutor threadPoolExecutor;
+    private Configurations configurations;
 //    private final Logger LOG = LogManager.getLogManager(); //Log4j2
 
 
@@ -23,15 +24,15 @@ public class Server {
         this.listeningIntervalMS = listeningIntervalMS;
         this.strategy = strategy;
         this.threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        this.configurations = Configurations.getInstance();
 
     }
     public void start() {
-        threadPoolExecutor.setCorePoolSize(Runtime.getRuntime().availableProcessors());
+        threadPoolExecutor.setCorePoolSize(configurations.threadPoolSize());
         new Thread(this::startServer).start();
     }
     public void startServer() {
         try {
-
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
 //            LOG.info("Starting server at port = " + port);
@@ -49,6 +50,7 @@ public class Server {
                 System.out.println("Socket is waiting");;
             } catch (InterruptedException e) {
                 e.printStackTrace();
+
             }
             }
             threadPoolExecutor.shutdown();
@@ -56,6 +58,7 @@ public class Server {
 
         } catch (SocketException e) {
             e.printStackTrace();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

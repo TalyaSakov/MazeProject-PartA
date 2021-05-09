@@ -55,6 +55,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         }
         arrangeBorders(rows,column,maze);
         initializeStartAndGoal(rows,column,maze);
+        maze.setMazeHashCode(maze.hashCode());
         return maze;
     }
 

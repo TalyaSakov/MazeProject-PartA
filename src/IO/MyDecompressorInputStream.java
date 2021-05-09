@@ -18,6 +18,8 @@ public class MyDecompressorInputStream extends InputStream {
 
         LinkedList<Byte> tempLinkedList = new LinkedList<>();
         int count=0;
+        int sumTo8=compressedBytes.length%8;
+
         for (byte tempByte : compressedBytes) {
             if (count==compressedBytes.length/8) break;
             int result = tempByte & 0xff;
@@ -42,7 +44,32 @@ public class MyDecompressorInputStream extends InputStream {
             count++;
         }
 
-        for (int i = 0; i < count*8; i++) {
+        if (sumTo8!=0){
+           int result2= compressedBytes[count]& 0xff;
+            str=(Integer.toBinaryString(result2));
+
+            byte flag ;
+
+            for (int i=0;i<str.length();i++){
+
+                if(Reverse(str).charAt(i)=='0'){
+                    flag=0;
+                }
+                else{
+                    flag=1;
+                }
+                tempLinkedList.add(flag);
+            }
+            for(int j=0;j<sumTo8-str.length();j++){
+                flag=0;
+                tempLinkedList.add(flag);
+            }
+        }
+        int runUntil=tempLinkedList.size();
+
+
+
+        for (int i = 0; i < runUntil; i++) {
             compressedBytes[i] = tempLinkedList.pollFirst(); //Makeing compressedBytes to UncompressedBytes
         }
         return 0;

@@ -15,6 +15,7 @@ public class Server {
     private IServerStrategy strategy;
     private volatile boolean stop;
     private ThreadPoolExecutor threadPoolExecutor;
+    private Configurations configurations;
 //    private final Logger LOG = LogManager.getLogManager(); //Log4j2
 
 
@@ -23,30 +24,35 @@ public class Server {
         this.listeningIntervalMS = listeningIntervalMS;
         this.strategy = strategy;
         this.threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        this.configurations = Configurations.getInstance();
 
     }
     public void start() {
-        threadPoolExecutor.setCorePoolSize(Runtime.getRuntime().availableProcessors());
+        threadPoolExecutor.setCorePoolSize(configurations.threadPoolSize());
         new Thread(this::startServer).start();
     }
     public void startServer() {
         try {
-            while(!stop){
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
 //            LOG.info("Starting server at port = " + port);
             System.out.println("Starting server at port = " + port);
+            while(!stop){
             try {
                 System.out.println("startClientSocket is started by new thread");
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Client accepted: " + clientSocket.toString());
                 threadPoolExecutor.execute(() -> handleClient(clientSocket));
+                Thread.sleep(1000);
 //      LOG.info("Client accepted: " + clientSocket.toString());
             } catch (IOException e) {
                 System.out.println("Socket is waiting");;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        }} catch (SocketException e) {
-            e.printStackTrace();
+            }
+            threadPoolExecutor.shutdown();
+            serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

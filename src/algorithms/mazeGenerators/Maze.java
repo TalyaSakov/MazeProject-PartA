@@ -2,6 +2,8 @@ package algorithms.mazeGenerators;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Maze class contains 5 fields - maze, row, column, end_position and start_position .
@@ -12,6 +14,15 @@ public class Maze implements Serializable {
     int column;
     Position end_position;
     Position start_position;
+    int mazeHashCode;
+
+    public void setMazeHashCode(int mazeHashCode) {
+        this.mazeHashCode = mazeHashCode;
+    }
+
+    public int getMazeHashCode() {
+        return mazeHashCode;
+    }
 
     /**
      * @return the maze's row amount.
@@ -238,9 +249,19 @@ public class Maze implements Serializable {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Maze maze1 = (Maze) o;
+        return rows == maze1.rows && column == maze1.column && Arrays.equals(maze, maze1.maze) && Objects.equals(end_position, maze1.end_position) && Objects.equals(start_position, maze1.start_position);
+    }
 
-
-
-
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(rows, column, end_position, start_position);
+        result = 31 * result + Arrays.hashCode(maze);
+        return result;
+    }
 }
 

@@ -15,19 +15,19 @@ public class SimpleMazeGenerator extends AMazeGenerator {
      */
      public Maze generate(int column, int rows) {
         if (rows < 2 || column < 2){throw new RuntimeException("Maze must be greater then 2X2");}
-        Maze maze =  new Maze(column,rows);
+        Maze maze =  new Maze(rows,column);
         for (int i = 1; i < rows ; i++) {
-            maze.maze[column -1][i] = 0;
+            maze.maze[i][column -1] = 0;
         }
         for (int i = 0; i < column; i++) {
-            maze.maze[i][0] = 0;
+            maze.maze[0][i] = 0;
         }
         for (int i = 0; i < maze.column -1 ; i++) {
-            for (int j = 1 ; j < maze.rows ; j++) {
-                maze.maze[i][j] = (int) Math.round(Math.random());
+            for (int j = 1 ; j < maze.rows; j++) {
+                maze.maze[j][i] = (int)Math.round(Math.random());
             }
         }
-        maze.setEndPosition(rows - 1, column -1);
+        maze.setEndPosition(rows - 1 , column - 1);
         maze.setStartPosition(0, 0);
 
         return maze;

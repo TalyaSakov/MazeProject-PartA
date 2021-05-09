@@ -1,6 +1,5 @@
 package IO;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.LinkedList;
@@ -23,21 +22,27 @@ public class MyCompressorOutputStream extends OutputStream {
         LinkedList<Byte> tempLinkedList = new LinkedList<>();
         int runningIndex = 0; //the running index on the unCompressedBytes array
         int countEight=0;
-        String str="";
+        StringBuilder str= new StringBuilder();
 
         while (runningIndex < unCompressedBytes.length) {
-            while(countEight<8) {
-                str+=unCompressedBytes[runningIndex];
-
+            while(countEight<8 && runningIndex<unCompressedBytes.length) {
+                str.append(unCompressedBytes[runningIndex]);
                 runningIndex++;
                 countEight++;
             }
-            byte val = (byte)Integer.parseInt(Reverse(str), 2);
+            if (countEight<8){
+                for(int i=0;i<8-countEight;i++){
+                    str.append(0);
+                }
+            }
+
+            byte val = (byte)Integer.parseInt(Reverse(str.toString()), 2);
             tempLinkedList.add(val);
-            str="";
+            str= new StringBuilder();
             countEight=0;
 
         }
+
         byte [] compressedBytes= new byte[tempLinkedList.size()];
         for(int i=0;i<compressedBytes.length;i++){
             compressedBytes[i]=tempLinkedList.get(i);
@@ -59,7 +64,7 @@ public class MyCompressorOutputStream extends OutputStream {
 
 
 
-    }
+}
 
 
 

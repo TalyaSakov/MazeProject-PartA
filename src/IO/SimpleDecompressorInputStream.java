@@ -8,6 +8,11 @@ import java.util.LinkedList;
 public class SimpleDecompressorInputStream extends InputStream {
     InputStream inputStream;
 
+    /**
+     *We will go over all the values ​​of the compressed array.
+     * Each value of 0 or 1 is opened according to the number of its instances
+     * respectively in the compressed array
+     */
 
     public SimpleDecompressorInputStream(InputStream inputStream) {
         this.inputStream = inputStream; //Bytearrayinputstream(compressed)

@@ -16,14 +16,12 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             Maze maze = (Maze)FromClient.readObject();
             SearchableMaze searchableMaze = new SearchableMaze(maze);
             int mazeIdentity = maze.getMazeHashCode();
-//            System.out.println(mazeIdentity);
-//            String mazeIdentity = "806464783.solution";
-//            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
-            String tempDirectoryPath = "C:\\Users\\Talya\\Desktop\\draft\\talya";
-            boolean exist = new File(tempDirectoryPath + '\\' + mazeIdentity +".solution").exists();
+            String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+
+            boolean exist = new File(tempDirectoryPath + '/' + mazeIdentity +".solution").exists();
 
             if (!exist){
-                ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '\\' + mazeIdentity+".solution"));
+                ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '/' + mazeIdentity+".solution"));
                 System.out.println("Solution doesn't exists");
                 BreadthFirstSearch bfs = new BreadthFirstSearch();
                 Solution mazeSolution = bfs.solve(searchableMaze);

@@ -12,6 +12,11 @@ public class MyCompressorOutputStream extends OutputStream {
         this.outputStream=outputStream;
     }
 
+    /**
+     * Our idea is to go through all the array values, and all 8 bits will get their corresponding
+     * decimal value. The array sent will be 8 times compressed from the original array and also
+     * significantly smaller than the array sent in SimpleCompressor
+     */
     @Override
     public void write(int b) throws IOException {
         outputStream.write(b);
@@ -26,25 +31,20 @@ public class MyCompressorOutputStream extends OutputStream {
 
         while (runningIndex < unCompressedBytes.length) {
             while(countEight<8 && runningIndex<unCompressedBytes.length) {
-                str.append(unCompressedBytes[runningIndex]);
+                str.append(unCompressedBytes[runningIndex]); //str will hold 8 bit each time. in the end of each itreation it would convert to decimal value
                 runningIndex++;
                 countEight++;
             }
-            if (countEight<8){
-          //
-
+            if (countEight<8){  //if we dont have 8 bit, then we will add zeros to unable the convertion to decimal value
                 for(int i=0;i<8-countEight;i++){
                     str.append(0);
                 }
-
-
             }
 
             byte val = (byte)Integer.parseInt(Reverse(str.toString()), 2);
             tempLinkedList.add(val);
             str= new StringBuilder();
             countEight=0;
-
         }
 
         byte [] compressedBytes= new byte[tempLinkedList.size()];

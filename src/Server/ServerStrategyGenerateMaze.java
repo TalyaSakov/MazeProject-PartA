@@ -1,17 +1,15 @@
 package Server;
 import IO.MyCompressorOutputStream;
-import IO.SimpleCompressorOutputStream;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
 
 import java.io.*;
-import java.util.ArrayList;
 
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
 
     @Override
-    public void applyStrategy(InputStream inFromClient, OutputStream outToClient) {
+    public void applyStrategy(InputStream inFromClient, OutputStream outToClient, Configurations configurations) {
 
         try{
             ObjectInputStream FromClient=new ObjectInputStream(inFromClient );

@@ -18,6 +18,7 @@ public class Configurations {
     private static final Properties properties = new Properties();
 
 
+
     public Configurations() {
         start();
     }

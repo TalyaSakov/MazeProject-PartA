@@ -15,7 +15,7 @@ public class Server {
     private IServerStrategy strategy;
     private volatile boolean stop;
     private ThreadPoolExecutor threadPoolExecutor;
-    private Configurations configurations;
+    public Configurations configurations;
 //    private final Logger LOG = LogManager.getLogManager(); //Log4j2
 
 
@@ -67,7 +67,7 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try {
             System.out.println(String.format("Client accepted- client with socket: %s", clientSocket.toString()));
-            strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
+            strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream(),this.configurations);
 //            LOG.info("Done handling client: " + clientSocket.toString());
             System.out.println("Done handling client: " + clientSocket.toString());
             clientSocket.close();

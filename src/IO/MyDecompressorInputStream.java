@@ -1,5 +1,4 @@
 package IO;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,13 +11,18 @@ public class MyDecompressorInputStream extends InputStream {
         this.outputStream=inputStream;
     }
 
+    /**
+     * We get a compressed array with decimal values.
+     * For each value it is given its binary value.
+     */
     public int read(byte[] compressedBytes) throws IOException {
+
         outputStream.read(compressedBytes);
         String str="";
 
         LinkedList<Byte> tempLinkedList = new LinkedList<>();
         int count=0;
-        int sumTo8=compressedBytes.length%8;
+        int sumTo8=compressedBytes.length%8; //if the array lenght not divides in 8
 
         for (byte tempByte : compressedBytes) {
             if (count==compressedBytes.length/8) break;
@@ -27,7 +31,7 @@ public class MyDecompressorInputStream extends InputStream {
 
             byte flag ;
             for (int i=0;i<str.length();i++){
-
+            // each bit would get his value as a string
                 if(Reverse(str).charAt(i)=='0'){
                     flag=0;
                 }
@@ -45,6 +49,7 @@ public class MyDecompressorInputStream extends InputStream {
         }
 
         if (sumTo8!=0){
+            //we have 1 more value to decomress
            int result2= compressedBytes[count]& 0xff;
             str=(Integer.toBinaryString(result2));
 
@@ -66,9 +71,6 @@ public class MyDecompressorInputStream extends InputStream {
             }
         }
         int runUntil=tempLinkedList.size();
-
-
-
         for (int i = 0; i < runUntil; i++) {
             compressedBytes[i] = tempLinkedList.pollFirst(); //Makeing compressedBytes to UncompressedBytes
         }

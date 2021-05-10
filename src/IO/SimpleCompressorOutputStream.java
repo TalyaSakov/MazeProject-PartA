@@ -18,6 +18,12 @@ public class SimpleCompressorOutputStream extends OutputStream {
         outputStream.write(b);
     }
 
+    /**
+     *  we will run over the matrix.
+     *  In each run on a set of parametres of the same value, we count the number they have appeard (size of the group).
+     *  the commpresed array will hold the amount of the appreance of each value, each time.
+     */
+
     @Override
     public void write(byte[] unCompressedBytes) throws IOException {
       LinkedList<Byte> tempLinkedList = new LinkedList<>();
@@ -31,7 +37,7 @@ public class SimpleCompressorOutputStream extends OutputStream {
                     tempLinkedList.add(sumBinaryVariable);
                     sumBinaryVariable = 0;
                 }
-                sumBinaryVariable++;
+                sumBinaryVariable++; //holds the value for each group of same varialbe
                 runningIndex ++;
             }
             tempLinkedList.add(sumBinaryVariable);

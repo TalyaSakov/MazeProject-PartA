@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+/**
+ *  Configuration class
+ */
 public class Configurations {
 
     private static Configurations single_instance = null;
@@ -23,6 +25,10 @@ public class Configurations {
         start();
     }
 
+    /**
+     * singleton function - getInstance
+     * @return
+     */
     public static Configurations getInstance()
     {
         if (single_instance == null){
@@ -33,6 +39,9 @@ public class Configurations {
         return single_instance;
     }
 
+    /**
+     * Connect to the configuration file
+     */
     public static void start(){
         InputStream input = null;
         try {
@@ -52,7 +61,9 @@ public class Configurations {
         }
     }
 
-
+    /**
+     * @return the IMazeGenerator instance.
+     */
     public IMazeGenerator mazeGeneratingAlgorithm() {
         return switch (properties.getProperty("mazeGenerator")) {
             case "simpleMazeGenerator" -> new SimpleMazeGenerator();
@@ -61,6 +72,9 @@ public class Configurations {
         };
     }
 
+    /**
+     * @return the ISearchingAlgorithm instance
+     */
     public ISearchingAlgorithm mazeSearchingAlgorithm() {
         return switch (properties.getProperty("searchingAlgorithm")) {
             case "BreadthFirstSearch" -> new BreadthFirstSearch();
@@ -70,6 +84,9 @@ public class Configurations {
         };
     }
 
+    /**
+     * @return the threadPoolSize
+     */
     public int threadPoolSize() {
 //            boolean isNum = true;
 //            try {

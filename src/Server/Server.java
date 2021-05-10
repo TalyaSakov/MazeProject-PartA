@@ -27,10 +27,18 @@ public class Server {
         this.configurations = Configurations.getInstance();
 
     }
+
+    /**
+     * Wrap function - sets the threadPool size
+     */
     public void start() {
         threadPoolExecutor.setCorePoolSize(configurations.threadPoolSize());
         new Thread(this::startServer).start();
     }
+
+    /**
+     * start the server
+     */
     public void startServer() {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -41,7 +49,7 @@ public class Server {
             while(!stop){
             try {
                 System.out.println("startClientSocket is started by new thread");
-                Socket clientSocket = serverSocket.accept();//waiting for a clinet
+                Socket clientSocket = serverSocket.accept();//waiting for a client
                 System.out.println("Client accepted: " + clientSocket.toString());
                 threadPoolExecutor.execute(() -> handleClient(clientSocket));
                 Thread.sleep(1000);
@@ -64,6 +72,9 @@ public class Server {
         }
     }
 
+    /**
+     * @param clientSocket - applyStrategy on the client by his sockets.
+     */
     private void handleClient(Socket clientSocket) {
         try {
             System.out.println(String.format("Client accepted- client with socket: %s", clientSocket.toString()));
@@ -77,6 +88,9 @@ public class Server {
         }
     }
 
+    /**
+     * stop the server
+     */
     public void stop(){
 //        LOG.info("Stopping server...");
         System.out.println("Stopping server...");

@@ -15,7 +15,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
      * @param outToClient output stream - to client.
      * @param configurations - configuration file.
      */
-    public void applyStrategy(InputStream inFromClient, OutputStream outToClient, Configurations configurations) {
+    public void ServerStrategy(InputStream inFromClient, OutputStream outToClient, Configurations configurations) {
         try{
             ObjectInputStream FromClient=new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient=new ObjectOutputStream (outToClient);
@@ -23,13 +23,13 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy{
             SearchableMaze searchableMaze = new SearchableMaze(maze);
             int mazeIdentity = maze.getMazeHashCode();
             String tempDirectoryPath = System.getProperty("java.io.tmpdir");
-            boolean exist = new File(tempDirectoryPath + '/' + mazeIdentity +".solution").exists();
+            boolean exist = new File(tempDirectoryPath + '\\' + mazeIdentity +".solution").exists();
 
             /**
              * Check if the solution is already in the directory.
              */
             if (!exist){
-                ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '/' + mazeIdentity+".solution"));
+                ObjectOutputStream outToDirectory = new ObjectOutputStream(new FileOutputStream(tempDirectoryPath + '\\' + mazeIdentity+".solution"));
                 ISearchingAlgorithm iSearchingAlgorithm = configurations.mazeSearchingAlgorithm();
                 Solution mazeSolution = iSearchingAlgorithm.solve(searchableMaze);
                 toClient.writeObject(mazeSolution);

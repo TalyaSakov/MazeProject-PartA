@@ -15,7 +15,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy {
      * @param outToClient output stream - to client.
      * @param configurations - configuration file.
      */
-    public void applyStrategy(InputStream inFromClient, OutputStream outToClient, Configurations configurations) {
+    public void ServerStrategy(InputStream inFromClient, OutputStream outToClient, Configurations configurations) {
 
         try{
             ObjectInputStream FromClient=new ObjectInputStream(inFromClient );

@@ -20,7 +20,7 @@ public class RunCommunicateWithServers {
         //Initializing servers
         Server mazeGeneratingServer = new Server(5400, 1000, new ServerStrategyGenerateMaze());
 //        Server solveSearchProblemServer = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-        //Server stringReverserServer = new Server(5402, 1000, new ServerStrategyStringReverser());
+//        Server stringReverserServer = new Server(5402, 1000, new ServerStrategyStringReverser());
 
         //Starting  servers
 //        solveSearchProblemServer.start();
@@ -86,7 +86,7 @@ public class RunCommunicateWithServers {
                         Solution mazeSolution = (Solution) fromServer.readObject();
                         //read generated maze (compressed with MyCompressor) from server
                         //Print Maze Solution retrieved from the server
-//                        System.out.println(String.format("Solution steps: %s", mazeSolution));
+                        System.out.println(String.format("Solution steps: %s", mazeSolution));
                         ArrayList<AState> mazeSolutionSteps = mazeSolution.getSolutionPath();
                         for (int i = 0; i < mazeSolutionSteps.size(); i++) {
                             System.out.println(String.format("%s. %s", i, mazeSolutionSteps.get(i).toString()));

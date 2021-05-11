@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
-import java.net.SocketTimeoutException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -58,12 +57,10 @@ public class Server {
                 System.out.println("Socket is waiting");;
             } catch (InterruptedException e) {
                 e.printStackTrace();
-
             }
             }
-            threadPoolExecutor.shutdown();
-            serverSocket.close();
-
+            threadPoolExecutor.shutdown(); // shut the thraedpool
+            serverSocket.close(); //close the server socket
         } catch (SocketException e) {
             e.printStackTrace();
 
@@ -78,7 +75,7 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try {
             System.out.println(String.format("Client accepted- client with socket: %s", clientSocket.toString()));
-            strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream(),this.configurations);
+            strategy.ServerStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream(),this.configurations);
 //            LOG.info("Done handling client: " + clientSocket.toString());
             System.out.println("Done handling client: " + clientSocket.toString());
             clientSocket.close();

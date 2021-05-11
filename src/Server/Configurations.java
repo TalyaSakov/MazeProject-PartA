@@ -45,7 +45,7 @@ public class Configurations {
     public static void start(){
         InputStream input = null;
         try {
-            input = new FileInputStream("./resources/config.properties");
+            input = Configurations.class.getResourceAsStream("/config.properties");
             properties.load(input);
 
         } catch (IOException ex) {
